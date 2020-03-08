@@ -1,0 +1,74 @@
+<resources>
+    <string name="app_name">TrashStatF</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string-array name="typeOfPack">
+        <item>Пластики</item>
+        <item>Стекло</item>
+        <item>Металлы</item>
+        <item>Композиционный материалы</item>
+        <item>Бумага</item>
+        <item>Органические материалы</item>
+    </string-array>
+
+    <string-array name="RecycleCodesPlastic">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>9</item>
+    </string-array>
+    <string-array name="RecycleCodesPaper">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>9</item>
+    </string-array>
+    <string-array name="RecycleCodesMetals">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>9</item>
+    </string-array>
+    <string-array name="RecycleCodesOrg">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>9</item>
+    </string-array>
+    <string-array name="RecycleCodesGlass">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>9</item>
+    </string-array>
+    <string-array name="RecycleCodesComp">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>9</item>
+    </string-array>
+</resources>
