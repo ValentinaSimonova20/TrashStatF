@@ -22,53 +22,46 @@
         <item>9</item>
     </string-array>
     <string-array name="RecycleCodesPaper">
-        <item>1</item>
-        <item>2</item>
-        <item>3</item>
-        <item>4</item>
-        <item>5</item>
-        <item>6</item>
-        <item>7</item>
-        <item>9</item>
+        <item>20</item>
+        <item>21</item>
+        <item>22</item>
+        <item>23</item>
     </string-array>
     <string-array name="RecycleCodesMetals">
-        <item>1</item>
-        <item>2</item>
-        <item>3</item>
-        <item>4</item>
-        <item>5</item>
-        <item>6</item>
-        <item>7</item>
-        <item>9</item>
+        <item>40</item>
+        <item>41</item>
     </string-array>
     <string-array name="RecycleCodesOrg">
-        <item>1</item>
-        <item>2</item>
-        <item>3</item>
-        <item>4</item>
-        <item>5</item>
-        <item>6</item>
-        <item>7</item>
-        <item>9</item>
+        <item>50</item>
+        <item>51</item>
+        <item>60</item>
+        <item>61</item>
     </string-array>
     <string-array name="RecycleCodesGlass">
-        <item>1</item>
-        <item>2</item>
-        <item>3</item>
-        <item>4</item>
-        <item>5</item>
-        <item>6</item>
-        <item>7</item>
-        <item>9</item>
+        <item>70</item>
+        <item>71</item>
+        <item>72</item>
+        <item>73</item>
+        <item>74</item>
+        <item>75</item>
+        <item>76</item>
+        <item>77</item>
+        <item>78</item>
+        <item>79</item>
     </string-array>
     <string-array name="RecycleCodesComp">
-        <item>1</item>
-        <item>2</item>
-        <item>3</item>
-        <item>4</item>
-        <item>5</item>
-        <item>6</item>
-        <item>7</item>
-        <item>9</item>
+        <item>80</item>
+        <item>81</item>
+        <item>82</item>
+        <item>83</item>
+        <item>84</item>
+        <item>85</item>
+        <item>90</item>
+        <item>91</item>
+        <item>92</item>
+        <item>95</item>
+        <item>96</item>
+        <item>97</item>
+        <item>98</item>
     </string-array>
 </resources>

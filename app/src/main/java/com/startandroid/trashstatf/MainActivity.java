@@ -28,11 +28,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);//кнопка меню
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        if(savedInstanceState == null){
+        if(savedInstanceState == null){ //если ни один пункт меню не выбран, то показывается статистика
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new StatisticsFragment()).commit();
         navigationView.setCheckedItem(R.id.nav_stat);}
     }
@@ -50,6 +50,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        //переключатель между фрагментами
         switch (item.getItemId()) {
             case R.id.nav_addPack:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new AddPackFragment()).commit();
