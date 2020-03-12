@@ -22,6 +22,7 @@ public class AddPackFragment extends Fragment implements AdapterView.OnItemSelec
     Spinner spinner1,spinner2;
     ArrayAdapter<CharSequence> adapter2;
     Button addPackButton;
+    //DatabaseHelper dbHelper;
 
     @Nullable
     @Override
@@ -33,7 +34,6 @@ public class AddPackFragment extends Fragment implements AdapterView.OnItemSelec
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         String packType = parent.getItemAtPosition(position).toString();
-
         switch(packType) {
             case "Пластики":
                 adapter2 = ArrayAdapter.createFromResource(getActivity(),R.array.RecycleCodesPlastic,android.R.layout.simple_spinner_item);
@@ -94,7 +94,7 @@ public class AddPackFragment extends Fragment implements AdapterView.OnItemSelec
         spinner1.setAdapter(adapter1);
         spinner1.setOnItemSelectedListener(this);
 
-
+        //dbHelper = new DatabaseHelper(getActivity());
         //кнопка "Добавить".
         addPackButton = getView().findViewById(R.id.button);
         addPackButton.setOnClickListener(new View.OnClickListener() {
