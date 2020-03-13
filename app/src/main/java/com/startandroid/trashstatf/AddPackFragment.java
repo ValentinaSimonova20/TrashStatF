@@ -22,7 +22,7 @@ public class AddPackFragment extends Fragment implements AdapterView.OnItemSelec
     Spinner spinner1,spinner2;
     ArrayAdapter<CharSequence> adapter2;
     Button addPackButton;
-    //DatabaseHelper dbHelper;
+
 
     @Nullable
     @Override
