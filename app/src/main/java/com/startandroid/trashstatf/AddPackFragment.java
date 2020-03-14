@@ -23,6 +23,7 @@ public class AddPackFragment extends Fragment implements AdapterView.OnItemSelec
     ArrayAdapter<CharSequence> adapter2;
     Button addPackButton;
 
+    DatabaseHelper dbHelper;
 
     @Nullable
     @Override
@@ -94,12 +95,13 @@ public class AddPackFragment extends Fragment implements AdapterView.OnItemSelec
         spinner1.setAdapter(adapter1);
         spinner1.setOnItemSelectedListener(this);
 
-        //dbHelper = new DatabaseHelper(getActivity());
+
         //кнопка "Добавить".
         addPackButton = getView().findViewById(R.id.button);
         addPackButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                dbHelper = new DatabaseHelper(getActivity());
                 //считываем все введенные значения в поля формы
                 EditText product = getView().findViewById(R.id.productName);
                 String mes = product.getText().toString();
@@ -112,6 +114,7 @@ public class AddPackFragment extends Fragment implements AdapterView.OnItemSelec
                 //потом они будут записываться в бд, и выводится в фрагменте статистика
                 String Text = mes+" "+spinner1Value+" "+spinner2Value+ " "+mes2;
                 Toast.makeText(getActivity(),Text,Toast.LENGTH_SHORT).show();
+                dbHelper.addProduct(mes,spinner1Value,spinner2Value,Integer.parseInt(mes2));
             }
         });
 

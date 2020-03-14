@@ -12,7 +12,7 @@ import androidx.annotation.Nullable;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 
-    public static String DATABASE_NAME ="packinfo_database1";
+    public static String DATABASE_NAME ="packinfo_database6";
     private static final int DATABASE_VERSION = 1;
     public static final String TABLE_USER = "users";
     public static final String TABLE_DICT = "dictionary";
@@ -21,6 +21,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String KEY_user_login = "user_login";
     private static final String KEY_user_password = "user_password";
     private static final String KEY_user_lstid = "user_lst_id";
+    private static final String KEY_user_amountP = "user_lst_amount";
     private static final String KEY_product_id = "product_id";
     private static final String KEY_product_name = "product_name";
     private static final String KEY_dict_id = "dict_id";
@@ -48,7 +49,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     private static final String CREATE_TABLE_LstOfProducts = "CREATE TABLE "+ TABLE_LstOfProducts +
             "(" + KEY_user_lstid  + " INTEGER,"+
-            KEY_product_id+" INTEGER );";
+            KEY_product_id+ " INTEGER,"+KEY_user_amountP+" INTEGER );";
+
+
 
     public DatabaseHelper(@Nullable Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -63,6 +66,84 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL(CREATE_TABLE_LstOfProducts);
         createDict(db);
         addOneUser(db);
+    }
+
+
+
+    public void addProduct(String productName,String packType,String recycleCode,int amount){
+        //Проверяем есть ли данный продукт в таблице продуктов
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(
+                "SELECT *" +" FROM " +TABLE_PRODUCTS+
+                " WHERE " +KEY_product_name+"='"+productName+"'"+" AND "+KEY_dict_id+
+                "=(SELECT "+KEY_dict_id+" FROM "+TABLE_DICT+" WHERE "+KEY_dict_type+"='"+packType+"'"+" AND "+KEY_dict_recycleNumber+"='"+recycleCode+"');" ,null);
+
+        //если нет, то добавляем его
+        if(!cursor.moveToNext()){
+
+            ContentValues values = new ContentValues();
+            //Выбираем ID из таблицы dict(таблица dict id-type-recyclecode)
+            Cursor cursor2 = db.rawQuery("SELECT "+KEY_dict_id+" FROM "+TABLE_DICT+" WHERE "+KEY_dict_type+"='"+packType+"' AND "+KEY_dict_recycleNumber+"='"+recycleCode+"'",null);
+            cursor2.moveToNext();
+            String dict_id = cursor2.getString(cursor2.getColumnIndex(KEY_dict_id));
+            values.put(KEY_product_name,productName);
+            values.put(KEY_dict_id,dict_id);
+            //добавление продукта
+            db.insert(TABLE_PRODUCTS,null,values);
+            cursor2.close();
+        }
+        cursor.close();
+        //заполняем таблицу listOfProduct(id list-id product - amount)
+        //РЕАЛИЗОВАТЬ ДОБАВЛЕНИЕ К AMOUNT, ЕСЛИ ПРОДУКТ УЖЕ ЕСТЬ  В ТАБЛИЦЕ
+        Cursor cursor3 = db.rawQuery(
+                "SELECT "+ KEY_product_id+" FROM " +TABLE_PRODUCTS+
+                        " WHERE " +KEY_product_name+"='"+productName+"' AND "+KEY_dict_id+
+                        "=(SELECT "+KEY_dict_id+" FROM "+TABLE_DICT+" WHERE "+KEY_dict_type+"='"+packType+"' AND "+KEY_dict_recycleNumber+"='"+recycleCode+"');" ,null);
+        cursor3.moveToNext();
+        String product_id = cursor3.getString(cursor3.getColumnIndex(KEY_product_id));
+        cursor3.close();
+        Cursor cursor4 = db.rawQuery("SELECT "+KEY_user_lstid+" FROM "+TABLE_USER+
+                " WHERE "+KEY_user_login+"='valentina'",null);
+        cursor4.moveToNext();
+        String lst_id = cursor4.getString(cursor4.getColumnIndex(KEY_user_lstid));
+        cursor4.close();
+        ContentValues values2 = new ContentValues();
+        values2.put(KEY_user_lstid,lst_id);
+        values2.put(KEY_product_id,product_id);
+        values2.put(KEY_user_amountP,amount);
+        db.insert(TABLE_LstOfProducts,null,values2);
+    }
+
+
+    //тестовый вывод результата таблиц product и listOfProducts
+    public StringBuilder getResult(){
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM " +TABLE_PRODUCTS ,null);
+        String res1,res2,res0;
+        StringBuilder txtData = new StringBuilder();
+        while(cursor.moveToNext()){
+
+            res0 = cursor.getString(cursor.getColumnIndex( KEY_product_id));
+            res1 = cursor.getString(cursor.getColumnIndex( KEY_product_name));
+            res2 = cursor.getString(cursor.getColumnIndex(KEY_dict_id));
+            txtData.append(res0+" "+res1 + " "+res2+"\n");
+
+        }
+        cursor.close();
+        txtData.append("\n\n\n");
+
+        Cursor cursor2 = db.rawQuery("SELECT * FROM " +TABLE_LstOfProducts ,null);
+        String res11,res12,res10;
+        while(cursor2.moveToNext()){
+
+            res10 = cursor2.getString(cursor2.getColumnIndex( KEY_user_lstid));
+            res11 = cursor2.getString(cursor2.getColumnIndex( KEY_product_id));
+            res12 = cursor2.getString(cursor2.getColumnIndex(KEY_user_amountP));
+            txtData.append(res10+" "+res11 + " "+res12+"\n");
+
+        }
+        cursor2.close();
+        return txtData;
     }
 
     //Добавляем одного тестового пользователя. Будет использоваться до реализации регистрации
