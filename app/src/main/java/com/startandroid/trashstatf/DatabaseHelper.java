@@ -94,7 +94,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
         cursor.close();
         //заполняем таблицу listOfProduct(id list-id product - amount)
-        //РЕАЛИЗОВАТЬ ДОБАВЛЕНИЕ К AMOUNT, ЕСЛИ ПРОДУКТ УЖЕ ЕСТЬ  В ТАБЛИЦЕ
+
         Cursor cursor3 = db.rawQuery(
                 "SELECT "+ KEY_product_id+" FROM " +TABLE_PRODUCTS+
                         " WHERE " +KEY_product_name+"='"+productName+"' AND "+KEY_dict_id+
@@ -102,16 +102,34 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         cursor3.moveToNext();
         String product_id = cursor3.getString(cursor3.getColumnIndex(KEY_product_id));
         cursor3.close();
+
+        Cursor cursor5 = db.rawQuery("SELECT "+KEY_user_amountP+" FROM "+TABLE_LstOfProducts+" WHERE "+KEY_product_id+"='"+product_id+"' AND "+KEY_user_lstid+"='1'",null);
+
         Cursor cursor4 = db.rawQuery("SELECT "+KEY_user_lstid+" FROM "+TABLE_USER+
                 " WHERE "+KEY_user_login+"='valentina'",null);
         cursor4.moveToNext();
         String lst_id = cursor4.getString(cursor4.getColumnIndex(KEY_user_lstid));
         cursor4.close();
+
+
         ContentValues values2 = new ContentValues();
         values2.put(KEY_user_lstid,lst_id);
         values2.put(KEY_product_id,product_id);
-        values2.put(KEY_user_amountP,amount);
-        db.insert(TABLE_LstOfProducts,null,values2);
+
+        //обновление lstid, если продукт в данном списке id уже есть
+        if (cursor5.moveToNext()){
+            int amountP = cursor5.getInt(cursor5.getColumnIndex(KEY_user_amountP));
+            amount+=amountP;
+            values2.put(KEY_user_amountP,amount);
+            String where = KEY_product_id + "='" + product_id+"' AND "+KEY_user_lstid+"='1'";
+            db.update(TABLE_LstOfProducts,values2,where,null);
+        }
+        else {
+
+            values2.put(KEY_user_amountP,amount);
+            db.insert(TABLE_LstOfProducts, null, values2);
+        }
+        cursor5.close();
     }
 
 
