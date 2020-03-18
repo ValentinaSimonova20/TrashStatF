@@ -12,7 +12,7 @@ import androidx.annotation.Nullable;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 
-    public static String DATABASE_NAME ="packinfo_database6";
+    public static String DATABASE_NAME ="Packinfo_database";
     private static final int DATABASE_VERSION = 1;
     public static final String TABLE_USER = "users";
     public static final String TABLE_DICT = "dictionary";
@@ -239,6 +239,23 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             res2 = cursor.getString(cursor.getColumnIndex(KEY_dict_recycleNumber));
             txtData.append(res0+" "+res1 + " "+res2+"\n");
 
+        }
+        cursor.close();
+        return txtData;
+    }
+
+    public StringBuilder viewStat(){
+        String query = "SELECT sum("+KEY_user_amountP+") as Amount, "+KEY_dict_recycleNumber+" FROM "+TABLE_PRODUCTS+" INNER JOIN "+TABLE_LstOfProducts+" on "+TABLE_LstOfProducts+"."+
+                KEY_product_id+"="+TABLE_PRODUCTS+"."+KEY_product_id+" INNER JOIN "+TABLE_DICT+" on "+TABLE_PRODUCTS+"."+KEY_dict_id+"="+TABLE_DICT+"."+KEY_dict_id+
+                " WHERE "+KEY_dict_type+"='Пластики' "+"GROUP BY "+KEY_dict_recycleNumber;
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(query,null);
+        String res1,res2;
+        StringBuilder txtData = new StringBuilder();
+        while(cursor.moveToNext()){
+            res1 = cursor.getString(cursor.getColumnIndex("Amount"));
+            res2 = cursor.getString(cursor.getColumnIndex(KEY_dict_recycleNumber));
+            txtData.append(res1+" "+res2+"\n");
         }
         cursor.close();
         return txtData;
