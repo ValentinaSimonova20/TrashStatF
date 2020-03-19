@@ -110,7 +110,7 @@ public class AddPackFragment extends Fragment implements AdapterView.OnItemSelec
                 EditText amountPack =  getView().findViewById(R.id.amountPack);
                 String mes2 = amountPack.getText().toString();
 
-                //пока что просто выводим в сплывающем окне значения, введенные в форму.
+
                 //потом они будут записываться в бд, и выводится в фрагменте статистика
                 String Text = mes+" "+spinner1Value+" "+spinner2Value+ " "+mes2;
                 Toast.makeText(getActivity(),Text,Toast.LENGTH_SHORT).show();

@@ -27,6 +27,6 @@ public class PassFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         txt1 = getView().findViewById(R.id.result);
-        txt1.setText(dbHelper.viewStat().toString());
+        txt1.setText(dbHelper.viewStat("Стекло").toString());
     }
 }

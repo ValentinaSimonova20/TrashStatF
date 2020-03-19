@@ -12,7 +12,7 @@ import androidx.annotation.Nullable;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 
-    public static String DATABASE_NAME ="Packinfo_database";
+    public static String DATABASE_NAME ="Packinfo_database___";
     private static final int DATABASE_VERSION = 1;
     public static final String TABLE_USER = "users";
     public static final String TABLE_DICT = "dictionary";
@@ -187,7 +187,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         String[] recycleCodesM =context.getResources().getStringArray(R.array.RecycleCodesMetals);   ;
         String[] recycleCodesOrg =context.getResources().getStringArray(R.array.RecycleCodesOrg);   ;
         String[] recycleCodesComp =context.getResources().getStringArray(R.array.RecycleCodesComp);
-        String[][] recycleCodes = { recycleCodesPl, recycleCodesG, recycleCodesPap, recycleCodesM, recycleCodesOrg,recycleCodesComp };;
+        String[][] recycleCodes = { recycleCodesPl, recycleCodesG, recycleCodesM, recycleCodesComp, recycleCodesPap,recycleCodesOrg };;
 
 
         for (int i=0;i<typeOfPack.length;i++)
@@ -229,7 +229,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     //временная функция. проверить всё ли правильно записалось в в Dict с типами упаковок и кодами переработки
     public StringBuilder viewDict(){
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.rawQuery("SELECT * FROM " +TABLE_USER+" " ,null);
+        Cursor cursor = db.rawQuery("SELECT * FROM " +TABLE_DICT+" " ,null);
         String res1,res2,res0;
         StringBuilder txtData = new StringBuilder();
         while(cursor.moveToNext()){
@@ -244,10 +244,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return txtData;
     }
 
-    public StringBuilder viewStat(){
+    public StringBuilder viewStat(String type){
         String query = "SELECT sum("+KEY_user_amountP+") as Amount, "+KEY_dict_recycleNumber+" FROM "+TABLE_PRODUCTS+" INNER JOIN "+TABLE_LstOfProducts+" on "+TABLE_LstOfProducts+"."+
                 KEY_product_id+"="+TABLE_PRODUCTS+"."+KEY_product_id+" INNER JOIN "+TABLE_DICT+" on "+TABLE_PRODUCTS+"."+KEY_dict_id+"="+TABLE_DICT+"."+KEY_dict_id+
-                " WHERE "+KEY_dict_type+"='Пластики' "+"GROUP BY "+KEY_dict_recycleNumber;
+                " WHERE "+KEY_dict_type+"='"+type+"'"+" GROUP BY "+KEY_dict_recycleNumber;
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(query,null);
         String res1,res2;

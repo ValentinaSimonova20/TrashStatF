@@ -3,12 +3,12 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string-array name="typeOfPack">
-        <item>Пластики</item>
-        <item>Стекло</item>
-        <item>Металлы</item>
-        <item>Композиционный материалы</item>
-        <item>Бумага</item>
-        <item>Органические материалы</item>
+        <item name="Plastic">Пластики</item>
+        <item name="Glass">Стекло</item>
+        <item name="Metals">Металлы</item>
+        <item name = "Comp">Композиционный материалы</item>
+        <item name = "Paper">Бумага</item>
+        <item name ="Org">Органические материалы</item>
     </string-array>
 
     <string-array name="RecycleCodesPlastic">
