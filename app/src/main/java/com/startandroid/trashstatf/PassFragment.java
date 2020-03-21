@@ -27,6 +27,12 @@ public class PassFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         txt1 = getView().findViewById(R.id.result);
-        txt1.setText(dbHelper.viewStat("Стекло").toString());
+        //txt1.setText(dbHelper.viewStat("Стекло").toString());
+        String[] tokens = dbHelper.viewStat("Пластики").toString().split("\n");
+        String res="";
+        for(int i=0;i<tokens.length;i++){
+            res+=tokens[i]+"\n";
+        }
+        txt1.setText(res);
     }
 }
