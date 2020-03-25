@@ -23,5 +23,10 @@
         <item android:id="@+id/nav_pass"
             android:icon="@drawable/ic_pass"
             android:title="Авторизация"/>
+
+        <item android:id="@+id/nav_reg"
+            android:icon="@drawable/ic_pass"
+            android:title="Регистрация"/>
+
     </group>
 </menu>
