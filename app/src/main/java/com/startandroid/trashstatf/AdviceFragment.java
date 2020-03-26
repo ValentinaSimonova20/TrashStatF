@@ -29,7 +29,7 @@ public class AdviceFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         txt1 = getView().findViewById(R.id.textViewRes);
-        txt1.setText(dbHelper.getResult().toString());
+        txt1.setText(dbHelper.viewUsers().toString());
 
     }
 }

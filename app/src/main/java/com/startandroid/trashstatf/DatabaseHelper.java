@@ -12,7 +12,7 @@ import androidx.annotation.Nullable;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 
-    public static String DATABASE_NAME ="Packinfo_database___";
+    public static String DATABASE_NAME ="PackInformationDB";
     private static final int DATABASE_VERSION = 1;
     public static final String TABLE_USER = "users";
     public static final String TABLE_DICT = "dictionary";
@@ -21,6 +21,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String KEY_user_login = "user_login";
     private static final String KEY_user_password = "user_password";
     private static final String KEY_user_lstid = "user_lst_id";
+    private static final String KEY_user_name = "user_name";
+    private static final String KEY_user_mobile = "user_mobile";
     private static final String KEY_user_amountP = "user_lst_amount";
     private static final String KEY_product_id = "product_id";
     private static final String KEY_product_name = "product_name";
@@ -35,7 +37,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String CREATE_TABLE_USERS = "CREATE TABLE "+ TABLE_USER +
                                                     "(" + KEY_user_login + " TEXT,"+
                                                     KEY_user_password+" TEXT," +
-                                                    KEY_user_lstid+" INTEGER PRIMARY KEY AUTOINCREMENT );";
+                                                    KEY_user_lstid+" INTEGER PRIMARY KEY AUTOINCREMENT,"+
+                                                    KEY_user_name+" TEXT,"+
+                                                    KEY_user_mobile+" TEXT );";
 
     private static final String CREATE_TABLE_DICT = "CREATE TABLE "+ TABLE_DICT +
             "(" + KEY_dict_id + "  INTEGER PRIMARY KEY AUTOINCREMENT,"+
@@ -67,6 +71,29 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         createDict(db);
         addOneUser(db);
     }
+
+    public boolean isUserExists(String login){
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM "+TABLE_USER+" WHERE "+KEY_user_login+"='"+login+"'",null);
+        if(cursor.moveToNext()){
+            cursor.close();
+            return true;
+        }
+        cursor.close();
+        return false;
+    }
+
+    public void addNewUser(String password, String email, String number, String name){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(KEY_user_login,email);
+        values.put(KEY_user_password,password);
+        values.put(KEY_user_mobile,number);
+        values.put(KEY_user_name,name);
+        db.insert(TABLE_USER , null, values);
+    }
+
+
 
 
 
@@ -212,13 +239,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public StringBuilder viewUsers(){
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery("SELECT * FROM " +TABLE_USER+" " ,null);
-        String res1,res2,res0;
+        String res1,res2,res0,res3,res4;
         StringBuilder txtData = new StringBuilder();
         while(cursor.moveToNext()) {
             res0 = cursor.getString(cursor.getColumnIndex( KEY_user_login));
             res1 = cursor.getString(cursor.getColumnIndex( KEY_user_password));
             res2 = cursor.getString(cursor.getColumnIndex(KEY_user_lstid));
-            txtData.append(res0+" "+res1 + " "+res2+"\n");
+            res3 = cursor.getString(cursor.getColumnIndex(KEY_user_name));
+            res4 = cursor.getString(cursor.getColumnIndex(KEY_user_mobile));
+            txtData.append(res0+" "+res1 + " "+res2+" "+res3+" "+res4+"\n");
         }
         cursor.close();
         return txtData;

@@ -71,25 +71,29 @@ public class RegisterFragment extends Fragment {
                     return;
                 }
 
+
                 //Регистрация пользователя
 
 
-                /**
+
                 User user = new User();
                 user.setEmail(email.getText().toString());
                 user.setName(name.getText().toString());
                 user.setPass(pass.getText().toString());
                 user.setPhone(phone.getText().toString());
 
-                 Проверка на то, есть ли пользователь с таким логином в бд
+                 //Проверка на то, есть ли пользователь с таким логином в бд
+                if(dbHelper.isUserExists(user.getEmail())){
+                    //Если есть, то не добавляем в таблицу Users
+                    Snackbar.make(root,"Данный пользователь уже зарегестрирован! Введите другой email", Snackbar.LENGTH_SHORT).show();
+                    return;
+                }
+                else{
+                    Snackbar.make(root,"Вы успешно зарегестрировались. Перейдите в пункт меню авторизация для продолжения работы под своей учетной записью.", Snackbar.LENGTH_SHORT).show();
+                    dbHelper.addNewUser(user.getPass(),user.getEmail(),user.getPhone(),user.getName());
+                }
 
-                 Если есть, то добавляем в таблицу Users
-                */
 
-
-
-                //Snackbar.make(root, "Пока что все норм!", Snackbar.LENGTH_SHORT).show();
-                //return;
 
 
             }

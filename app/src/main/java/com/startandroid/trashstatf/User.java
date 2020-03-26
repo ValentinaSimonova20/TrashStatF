@@ -1,7 +1,7 @@
 package com.startandroid.trashstatf;
 
 public class User {
-    private String name, email, pass, phone;
+    public String name, email, pass, phone;
 
     public User(){}
 
