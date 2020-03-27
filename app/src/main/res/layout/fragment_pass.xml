@@ -1,24 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent" android:layout_height="match_parent"
-    android:background="@android:color/holo_green_light">
+    android:background="@android:color/holo_green_light"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/root_element2">
 
-    <TextView
-        android:id="@+id/result"
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:orientation="vertical">
+
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/emailField"
+            android:hint="Введите Email"
+            android:inputType="textEmailAddress"
+            android:text=""
+            android:textColor="@color/colorPrimary"
+            android:textColorHint="@color/colorPrimaryDark"
+            android:textSize="20sp"
+
+            app:met_floatingLabel="highlight"
+            app:met_baseColor="#0056d3"
+            app:met_primaryColor="#982360"
+            app:met_singleLineEllipsis="true"/>
+
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/passField"
+            android:hint="Введите пароль"
+            android:inputType="textPassword"
+            android:text=""
+            android:textColor="@color/colorPrimary"
+            android:textColorHint="@color/colorPrimaryDark"
+            android:textSize="20sp"
+
+            app:met_floatingLabel="highlight"
+            app:met_baseColor="#0056d3"
+            app:met_primaryColor="#982360"
+            app:met_singleLineEllipsis="true"/>
+
+
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/authButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="103dp"
-        android:layout_marginTop="112dp"
-        android:text="TextView" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="pass Fragment"
-        android:textSize="30sp"
-        android:layout_centerInParent="true"/>
+        android:layout_marginStart="129dp"
+        android:layout_marginTop="382dp"
+        android:text="Авторизоваться" />
 
 
 </RelativeLayout>

@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
@@ -83,6 +84,17 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return false;
     }
 
+    public boolean isPassCorrect(String login, String pass){
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursore = db.rawQuery("SELECT * FROM "+TABLE_USER+" WHERE "+KEY_user_login+"='"+login+"'"+" AND "+KEY_user_password+"='"+pass+"'",null);
+        if(cursore.moveToNext()){
+            cursore.close();
+            return true;
+        }
+        cursore.close();
+        return false;
+    }
+
     public void addNewUser(String password, String email, String number, String name){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -91,6 +103,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put(KEY_user_mobile,number);
         values.put(KEY_user_name,name);
         db.insert(TABLE_USER , null, values);
+    }
+
+    public boolean authUser(String email, String pass){
+        if(isUserExists(email)){
+            return isPassCorrect(email, pass);
+        }
+        return false;
     }
 
 
@@ -289,6 +308,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         cursor.close();
         return txtData;
     }
+
+
+
 
 
 
