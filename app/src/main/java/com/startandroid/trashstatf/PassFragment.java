@@ -1,6 +1,8 @@
 package com.startandroid.trashstatf;
 
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -25,6 +27,7 @@ public class PassFragment extends Fragment {
     MaterialEditText email;
     MaterialEditText pass;
     Button authButton;
+    SharedPreferences loginPref;
 
     RelativeLayout root2;
 
@@ -64,6 +67,12 @@ public class PassFragment extends Fragment {
 
                 if(dbHelper.authUser(email.getText().toString(),pass.getText().toString())){
                     Snackbar.make(root2, "Вы авторизовались!", Snackbar.LENGTH_SHORT).show();
+
+                    //запоминаем авторизовавшегося пользователя
+                    loginPref = getActivity().getSharedPreferences("login", Context.MODE_PRIVATE);
+                    SharedPreferences.Editor ed = loginPref.edit();
+                    ed.putString("UsersLogin",email.getText().toString());
+                    ed.commit();
                     return;
                 }
                 else {
@@ -71,7 +80,7 @@ public class PassFragment extends Fragment {
                     return;
                 }
 
-                /* Запомнить авторизовавшегося пользователя */
+
 
             }
         };

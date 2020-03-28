@@ -1,5 +1,7 @@
 package com.startandroid.trashstatf;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,6 +16,7 @@ import androidx.fragment.app.Fragment;
 public class AdviceFragment extends Fragment {
     DatabaseHelper dbHelper;
     TextView txt1;
+    SharedPreferences loginPref;
 
     @Nullable
     @Override
@@ -29,7 +32,9 @@ public class AdviceFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         txt1 = getView().findViewById(R.id.textViewRes);
-        txt1.setText(dbHelper.viewUsers().toString());
+        loginPref = getActivity().getSharedPreferences("login", Context.MODE_PRIVATE);
+        String userLogin = loginPref.getString("UsersLogin","");
+        txt1.setText(userLogin);
 
     }
 }
