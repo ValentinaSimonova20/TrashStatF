@@ -1,5 +1,7 @@
 package com.startandroid.trashstatf;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,6 +25,7 @@ public class GraphFragment extends Fragment {
 
     private BarChart mChart;
     private DatabaseHelper dbHelper;
+    SharedPreferences loginPref;
 
     @Nullable
     @Override
@@ -47,6 +50,9 @@ public class GraphFragment extends Fragment {
     }
 
     public void setData(int count){
+        loginPref = getActivity().getSharedPreferences("login", Context.MODE_PRIVATE);
+        String userLogin = loginPref.getString("UsersLogin","");
+        String user_lst_id = dbHelper.getUserLst_id(userLogin);
         ArrayList<BarEntry> yValeus = new ArrayList<>();
 
         String[] typeOfPack =getContext().getResources().getStringArray(R.array.typeOfPack);
@@ -56,9 +62,10 @@ public class GraphFragment extends Fragment {
         //Отображение на графике информации об использовании упаковки(6 столбцов для каждого типа. в каждом столбце отображаются разными цветами количество разных кодов переработки)
         for(int i=0; i<count;i++){
 
-            String[] tokens = dbHelper.viewStat(typeOfPack[i]).toString().split("\n");
+            String[] tokens = dbHelper.viewStat(typeOfPack[i],user_lst_id).toString().split("\n");
             float[] result = new float[tokens.length];
             for(int j=0;j<tokens.length;j++){
+                //нужно обработать пустое значение чтобы ошибка не вылетала
                 result[j]=Float.parseFloat(tokens[j].split(" ")[0]);
             }
 

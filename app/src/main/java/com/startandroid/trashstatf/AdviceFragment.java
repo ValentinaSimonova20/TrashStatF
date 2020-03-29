@@ -34,7 +34,10 @@ public class AdviceFragment extends Fragment {
         txt1 = getView().findViewById(R.id.textViewRes);
         loginPref = getActivity().getSharedPreferences("login", Context.MODE_PRIVATE);
         String userLogin = loginPref.getString("UsersLogin","");
-        txt1.setText(userLogin);
+        String user_lst_id = dbHelper.getUserLst_id(userLogin);
+        txt1.setText(userLogin+" "+user_lst_id);
+
+
 
     }
 }

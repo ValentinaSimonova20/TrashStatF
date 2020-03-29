@@ -1,5 +1,7 @@
 package com.startandroid.trashstatf;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,6 +26,7 @@ public class AddPackFragment extends Fragment implements AdapterView.OnItemSelec
     Button addPackButton;
 
     DatabaseHelper dbHelper;
+    SharedPreferences loginPref;
 
     @Nullable
     @Override
@@ -114,7 +117,10 @@ public class AddPackFragment extends Fragment implements AdapterView.OnItemSelec
                 //потом они будут записываться в бд, и выводится в фрагменте статистика
                 String Text = mes+" "+spinner1Value+" "+spinner2Value+ " "+mes2;
                 Toast.makeText(getActivity(),Text,Toast.LENGTH_SHORT).show();
-                dbHelper.addProduct(mes,spinner1Value,spinner2Value,Integer.parseInt(mes2));
+                loginPref = getActivity().getSharedPreferences("login", Context.MODE_PRIVATE);
+                String userLogin = loginPref.getString("UsersLogin","");
+                String user_lst_id = dbHelper.getUserLst_id(userLogin);
+                dbHelper.addProduct(mes,spinner1Value,spinner2Value,Integer.parseInt(mes2),user_lst_id,userLogin);
             }
         });
 

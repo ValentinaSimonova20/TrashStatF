@@ -112,11 +112,20 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return false;
     }
 
+    public String getUserLst_id(String login){
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursore = db.rawQuery("SELECT "+KEY_user_lstid+" FROM "+TABLE_USER+" WHERE "+KEY_user_login+"='"+login+"'",null);
+        cursore.moveToNext();
+        String Lst_id;
+        Lst_id = cursore.getString(cursore.getColumnIndex(KEY_user_lstid));
+        return Lst_id;
+    }
 
 
 
 
-    public void addProduct(String productName,String packType,String recycleCode,int amount){
+
+    public void addProduct(String productName,String packType,String recycleCode,int amount, String userLst_id, String userLogin){
         //Проверяем есть ли данный продукт в таблице продуктов
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(
@@ -149,10 +158,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         String product_id = cursor3.getString(cursor3.getColumnIndex(KEY_product_id));
         cursor3.close();
 
-        Cursor cursor5 = db.rawQuery("SELECT "+KEY_user_amountP+" FROM "+TABLE_LstOfProducts+" WHERE "+KEY_product_id+"='"+product_id+"' AND "+KEY_user_lstid+"='1'",null);
+        Cursor cursor5 = db.rawQuery("SELECT "+KEY_user_amountP+" FROM "+TABLE_LstOfProducts+" WHERE "+KEY_product_id+"='"+product_id+"' AND "+KEY_user_lstid+"="+userLst_id,null);
 
         Cursor cursor4 = db.rawQuery("SELECT "+KEY_user_lstid+" FROM "+TABLE_USER+
-                " WHERE "+KEY_user_login+"='valentina'",null);
+                " WHERE "+KEY_user_login+"='"+userLogin+"'",null);
         cursor4.moveToNext();
         String lst_id = cursor4.getString(cursor4.getColumnIndex(KEY_user_lstid));
         cursor4.close();
@@ -167,7 +176,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             int amountP = cursor5.getInt(cursor5.getColumnIndex(KEY_user_amountP));
             amount+=amountP;
             values2.put(KEY_user_amountP,amount);
-            String where = KEY_product_id + "='" + product_id+"' AND "+KEY_user_lstid+"='1'";
+            String where = KEY_product_id + "='" + product_id+"' AND "+KEY_user_lstid+"="+userLst_id;
             db.update(TABLE_LstOfProducts,values2,where,null);
         }
         else {
@@ -292,10 +301,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return txtData;
     }
 
-    public StringBuilder viewStat(String type){
+    public StringBuilder viewStat(String type,String userLst_id){
         String query = "SELECT sum("+KEY_user_amountP+") as Amount, "+KEY_dict_recycleNumber+" FROM "+TABLE_PRODUCTS+" INNER JOIN "+TABLE_LstOfProducts+" on "+TABLE_LstOfProducts+"."+
                 KEY_product_id+"="+TABLE_PRODUCTS+"."+KEY_product_id+" INNER JOIN "+TABLE_DICT+" on "+TABLE_PRODUCTS+"."+KEY_dict_id+"="+TABLE_DICT+"."+KEY_dict_id+
-                " WHERE "+KEY_dict_type+"='"+type+"'"+" GROUP BY "+KEY_dict_recycleNumber;
+                " WHERE "+KEY_dict_type+"='"+type+"'"+" AND "+KEY_user_lstid+"="+userLst_id+" GROUP BY "+KEY_dict_recycleNumber;
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(query,null);
         String res1,res2;
