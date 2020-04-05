@@ -305,6 +305,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         String query = "SELECT sum("+KEY_user_amountP+") as Amount, "+KEY_dict_recycleNumber+" FROM "+TABLE_PRODUCTS+" INNER JOIN "+TABLE_LstOfProducts+" on "+TABLE_LstOfProducts+"."+
                 KEY_product_id+"="+TABLE_PRODUCTS+"."+KEY_product_id+" INNER JOIN "+TABLE_DICT+" on "+TABLE_PRODUCTS+"."+KEY_dict_id+"="+TABLE_DICT+"."+KEY_dict_id+
                 " WHERE "+KEY_dict_type+"='"+type+"'"+" AND "+KEY_user_lstid+"="+userLst_id+" GROUP BY "+KEY_dict_recycleNumber;
+
+
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(query,null);
         String res1,res2;
@@ -312,7 +314,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         while(cursor.moveToNext()){
             res1 = cursor.getString(cursor.getColumnIndex("Amount"));
             res2 = cursor.getString(cursor.getColumnIndex(KEY_dict_recycleNumber));
-            txtData.append(res1+" "+res2+"\n");
+            txtData.append(res2+"                            "+res1+"\n");
         }
         cursor.close();
         return txtData;

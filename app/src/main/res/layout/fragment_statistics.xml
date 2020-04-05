@@ -1,137 +1,172 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent" android:layout_height="match_parent"
-    android:background="@android:color/holo_red_light">
+    android:layout_width="match_parent" android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/textView5"
-        android:layout_width="125dp"
-        android:layout_height="30dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="68dp"
-        android:layout_marginTop="55dp"
-        android:text="Пластики"
-        app:autoSizeTextType="uniform" />
+    <ScrollView
+        android:fillViewport="true"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/textView6"
-        android:layout_width="125dp"
-        android:layout_height="30dp"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="68dp"
-        android:layout_marginTop="54dp"
-        android:layout_toEndOf="@+id/textView5"
-        android:text="Стекло"
-        app:autoSizeTextType="uniform" />
-
-    <TextView
-        android:id="@+id/textView7"
-        android:layout_width="125dp"
-        android:layout_height="30dp"
-        android:layout_below="@+id/textViewGlass"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="68dp"
-        android:layout_marginTop="70dp"
-        android:text="Металлы"
-        app:autoSizeTextType="uniform" />
-
-    <TextView
-        android:id="@+id/textView8"
-        android:layout_width="183dp"
-        android:layout_height="47dp"
-        android:layout_below="@+id/textViewMetals"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="162dp"
-        android:layout_marginTop="64dp"
-        android:text="Композиционные материалы"
-        app:autoSizeTextType="uniform" />
-
-    <TextView
-        android:id="@+id/textView9"
-        android:layout_width="125dp"
-        android:layout_height="30dp"
-        android:layout_below="@+id/textViewGlass"
-        android:layout_marginStart="68dp"
-        android:layout_marginTop="70dp"
-        android:layout_toEndOf="@+id/textView7"
-        android:text="Бумага"
-        app:autoSizeTextType="uniform" />
-
-    <TextView
-        android:id="@+id/textViewPlastics"
-        android:layout_width="wrap_content"
+    <TableLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/textView5"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="92dp"
-        android:layout_marginTop="32dp"
-        android:text="TextView"
-        app:autoSizeTextType="uniform" />
+        android:stretchColumns="*"
+        android:background="#5ED0BD"
+        >
+        <TableRow
+            android:background="#FFAB73"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-    <TextView
-        android:id="@+id/textViewGlass"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/textView6"
-        android:layout_marginStart="117dp"
-        android:layout_marginTop="26dp"
-        android:layout_toEndOf="@+id/textViewPlastics"
-        android:text="TextView"
-        app:autoSizeTextType="uniform" />
+            <TextView
+                android:layout_width="0dp">
 
-    <TextView
-        android:id="@+id/textViewMetals"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/textView7"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="86dp"
-        android:layout_marginTop="32dp"
-        android:text="TextView"
-        app:autoSizeTextType="uniform" />
+            </TextView>
 
-    <TextView
-        android:id="@+id/textViewComp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/textView8"
-        android:layout_marginStart="118dp"
-        android:layout_marginTop="30dp"
-        android:layout_toEndOf="@+id/textView10"
-        android:text="TextView" />
+            <TextView
+                android:text="Код переработки      Кол-во"
+                android:background="#FFAB73"
+                android:textSize="15sp"
+            />
+        </TableRow>
 
-    <TextView
-        android:id="@+id/textViewPaper"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/textView9"
-        android:layout_marginStart="117dp"
-        android:layout_marginTop="32dp"
-        android:layout_toEndOf="@+id/textViewMetals"
-        android:text="TextView" />
+        <TableRow
+            android:background="#FFAB73"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="2dip">
 
-    <TextView
-        android:id="@+id/textView10"
-        android:layout_width="141dp"
-        android:layout_height="50dp"
-        android:layout_below="@+id/textViewMetals"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="23dp"
-        android:layout_marginTop="129dp"
-        android:text="Органические материалы"
-        app:autoSizeTextType="uniform" />
+            <TextView
+                android:id="@+id/textView5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginBottom="32dp"
+                android:text="Пластики"
+                 />
+            <TextView
+                android:id="@+id/textViewPlastics"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="35dp"
+                android:layout_marginTop="10dp"
+                android:textSize="15sp"
+                android:text="TextView"
+                />
+        </TableRow>
 
-    <TextView
-        android:id="@+id/textViewOrg"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/textView10"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="67dp"
-        android:layout_marginTop="44dp"
-        android:text="TextView" />
+        <TableRow android:background="#FFAB73" android:layout_margin="2dip">
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginBottom="32dp"
+            android:text="Стекло"
+            />
 
+            <TextView
+                android:id="@+id/textViewGlass"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="35dp"
+                android:layout_marginTop="10dp"
+                android:textSize="15sp"
+                android:text="TextView"
+                app:autoSizeTextType="uniform" />
+        </TableRow>
+
+        <TableRow android:background="#FFAB73" android:layout_margin="2dip">
+            <TextView
+                android:id="@+id/textView7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="32dp"
+                android:text="Металлы"
+                android:layout_marginBottom="32dp"
+                />
+            <TextView
+                android:id="@+id/textViewMetals"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="35dp"
+                android:layout_marginTop="10dp"
+                android:textSize="15sp"
+                android:text="TextView"
+                app:autoSizeTextType="uniform" />
+        </TableRow>
+
+
+        <TableRow android:background="#FFAB73" android:layout_margin="2dip">
+            <TextView
+                android:id="@+id/textView8"
+                android:layout_width="183dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="32dp"
+                android:textSize="15sp"
+                android:text="Композиционные материалы"
+                android:layout_marginBottom="32dp"
+                 />
+            <TextView
+                android:id="@+id/textViewComp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="35dp"
+                android:layout_marginTop="10dp"
+                android:textSize="15sp"
+                android:text="TextView" />
+        </TableRow>
+
+        <TableRow android:background="#FFAB73" android:layout_margin="2dip">
+            <TextView
+                android:id="@+id/textView9"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="32dp"
+                android:text="Бумага"
+                android:layout_marginBottom="32dp"
+                 />
+            <TextView
+                android:id="@+id/textViewPaper"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="35dp"
+                android:layout_marginTop="10dp"
+                android:textSize="15sp"
+                android:text="TextView" />
+    </TableRow>
+
+        <TableRow android:background="#FFAB73" android:layout_margin="2dip">
+            <TextView
+                android:id="@+id/textView10"
+                android:layout_width="141dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="32dp"
+                android:text="Органические материалы"
+                android:textSize="20sp"
+                android:layout_marginBottom="32dp"
+                 />
+            <TextView
+                android:id="@+id/textViewOrg"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="35dp"
+                android:layout_marginTop="10dp"
+                android:textSize="15sp"
+                android:text="TextView" />
+        </TableRow>
+    </TableLayout>
+    </ScrollView>
 
 </RelativeLayout>

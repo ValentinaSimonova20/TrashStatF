@@ -33,8 +33,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         toggle.syncState();
 
         if(savedInstanceState == null){ //если ни один пункт меню не выбран, то показывается статистика
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new StatisticsFragment()).commit();
-        navigationView.setCheckedItem(R.id.nav_stat);}
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new PassFragment()).commit();
+        navigationView.setCheckedItem(R.id.nav_pass);}
     }
 
 

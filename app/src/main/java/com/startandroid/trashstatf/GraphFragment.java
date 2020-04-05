@@ -75,7 +75,7 @@ public class GraphFragment extends Fragment {
 
         BarDataSet set1;
 
-        set1 = new BarDataSet(yValeus,"Statisticst of USA");
+        set1 = new BarDataSet(yValeus,"Использование упаковок");
         set1.setDrawIcons(false);
         //set1.setStackLabels(new String[]{"Children","Adults","elders"});
         set1.setColors(ColorTemplate.JOYFUL_COLORS);
@@ -90,6 +90,9 @@ public class GraphFragment extends Fragment {
         mChart.getDescription().setEnabled(false);
         mChart.getXAxis().setValueFormatter(new IndexAxisValueFormatter(typeOfPack2));
         mChart.getXAxis().setPosition(XAxis.XAxisPosition.BOTTOM);
+        mChart.getXAxis().setTextSize(12f);
+
+
 
 
     }
