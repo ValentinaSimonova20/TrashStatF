@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent" android:layout_height="match_parent"
-    android:background="@android:color/holo_green_light"
+    android:background="#FFE6E7"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/root_element2">
 
@@ -16,6 +16,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/emailField"
             android:hint="Введите Email"
+            android:layout_marginTop="150dp"
             android:inputType="textEmailAddress"
             android:text=""
             android:textColor="@color/colorPrimary"
@@ -55,7 +56,8 @@
         android:layout_alignParentTop="true"
         android:layout_marginStart="129dp"
         android:layout_marginTop="382dp"
-        android:text="Авторизоваться" />
+        android:text="Авторизоваться"
+        android:background="#EBB4E4"/>
 
 
 </RelativeLayout>

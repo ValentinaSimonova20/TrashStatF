@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@android:color/holo_red_light"
+    android:background="#FFE6E7"
     android:id="@+id/root_element">
 
     <LinearLayout
@@ -19,8 +19,9 @@
             android:hint="Введите Email"
             android:inputType="textEmailAddress"
             android:text=""
-            android:textColor="@color/colorPrimary"
-            android:textColorHint="@color/colorPrimaryDark"
+            android:textColorHighlight="#7D0057"
+            android:textColor="#7D0057"
+            android:textColorHint="#7D0057"
             android:textSize="20sp"
 
             app:met_floatingLabel="highlight"
@@ -61,20 +62,22 @@
             app:met_singleLineEllipsis="true" />
 
         <com.rengwuxian.materialedittext.MaterialEditText
+            android:id="@+id/phoneField"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/phoneField"
             android:hint="Введите номер телефона"
             android:inputType="phone"
             android:text=""
             android:textColor="@color/colorPrimary"
-            android:textColorHint="@color/colorPrimaryDark"
-            android:textSize="20sp"
+            android:textColorHighlight="@color/colorPrimary"
+            android:textColorHint="#68006C"
 
-            app:met_floatingLabel="highlight"
+            android:textColorLink="@color/colorPrimary"
+            android:textSize="20sp"
             app:met_baseColor="#0056d3"
+            app:met_floatingLabel="highlight"
             app:met_primaryColor="#982360"
-            app:met_singleLineEllipsis="true"/>
+            app:met_singleLineEllipsis="true" />
 
     </LinearLayout>
 
@@ -86,7 +89,8 @@
         android:layout_alignParentTop="true"
         android:layout_marginStart="103dp"
         android:layout_marginTop="380dp"
-        android:text="Зарегестрироваться" />
+        android:text="Зарегестрироваться"
+        android:background="#EBB4E4"/>
 
 
 </RelativeLayout>

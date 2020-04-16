@@ -188,36 +188,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
 
-    //тестовый вывод результата таблиц product и listOfProducts
-    public StringBuilder getResult(){
-        SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.rawQuery("SELECT * FROM " +TABLE_PRODUCTS ,null);
-        String res1,res2,res0;
-        StringBuilder txtData = new StringBuilder();
-        while(cursor.moveToNext()){
 
-            res0 = cursor.getString(cursor.getColumnIndex( KEY_product_id));
-            res1 = cursor.getString(cursor.getColumnIndex( KEY_product_name));
-            res2 = cursor.getString(cursor.getColumnIndex(KEY_dict_id));
-            txtData.append(res0+" "+res1 + " "+res2+"\n");
-
-        }
-        cursor.close();
-        txtData.append("\n\n\n");
-
-        Cursor cursor2 = db.rawQuery("SELECT * FROM " +TABLE_LstOfProducts ,null);
-        String res11,res12,res10;
-        while(cursor2.moveToNext()){
-
-            res10 = cursor2.getString(cursor2.getColumnIndex( KEY_user_lstid));
-            res11 = cursor2.getString(cursor2.getColumnIndex( KEY_product_id));
-            res12 = cursor2.getString(cursor2.getColumnIndex(KEY_user_amountP));
-            txtData.append(res10+" "+res11 + " "+res12+"\n");
-
-        }
-        cursor2.close();
-        return txtData;
-    }
 
     //Добавляем одного тестового пользователя. Будет использоваться до реализации регистрации
 
@@ -283,23 +254,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 
 
-    //временная функция. проверить всё ли правильно записалось в в Dict с типами упаковок и кодами переработки
-    public StringBuilder viewDict(){
-        SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.rawQuery("SELECT * FROM " +TABLE_DICT+" " ,null);
-        String res1,res2,res0;
-        StringBuilder txtData = new StringBuilder();
-        while(cursor.moveToNext()){
-
-            res0 = cursor.getString(cursor.getColumnIndex( KEY_dict_id));
-            res1 = cursor.getString(cursor.getColumnIndex( KEY_dict_type));
-            res2 = cursor.getString(cursor.getColumnIndex(KEY_dict_recycleNumber));
-            txtData.append(res0+" "+res1 + " "+res2+"\n");
-
-        }
-        cursor.close();
-        return txtData;
-    }
 
     public StringBuilder viewStat(String type,String userLst_id){
         String query = "SELECT sum("+KEY_user_amountP+") as Amount, "+KEY_dict_recycleNumber+" FROM "+TABLE_PRODUCTS+" INNER JOIN "+TABLE_LstOfProducts+" on "+TABLE_LstOfProducts+"."+
