@@ -13,21 +13,23 @@
         android:orientation="vertical">
 
         <com.rengwuxian.materialedittext.MaterialEditText
+            android:id="@+id/emailField"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/emailField"
             android:hint="Введите Email"
             android:inputType="textEmailAddress"
+            android:scrollbarThumbHorizontal="@color/Black"
             android:text=""
-            android:textColorHighlight="#7D0057"
             android:textColor="#7D0057"
+            android:textColorHighlight="#7D0057"
             android:textColorHint="#7D0057"
-            android:textSize="20sp"
 
-            app:met_floatingLabel="highlight"
+            android:textSize="20sp"
             app:met_baseColor="#0056d3"
+            app:met_floatingLabel="highlight"
+            app:met_textColorHint = "#5a1539"
             app:met_primaryColor="#982360"
-            app:met_singleLineEllipsis="true"/>
+            app:met_singleLineEllipsis="true" />
 
         <com.rengwuxian.materialedittext.MaterialEditText
             android:layout_width="match_parent"
@@ -42,6 +44,7 @@
 
             app:met_floatingLabel="highlight"
             app:met_baseColor="#0056d3"
+            app:met_textColorHint = "#5a1539"
             app:met_primaryColor="#982360"
             app:met_singleLineEllipsis="true"/>
 
@@ -59,6 +62,7 @@
             app:met_baseColor="#0056d3"
             app:met_floatingLabel="highlight"
             app:met_primaryColor="#982360"
+            app:met_textColorHint = "#5a1539"
             app:met_singleLineEllipsis="true" />
 
         <com.rengwuxian.materialedittext.MaterialEditText
@@ -75,6 +79,7 @@
             android:textColorLink="@color/colorPrimary"
             android:textSize="20sp"
             app:met_baseColor="#0056d3"
+            app:met_textColorHint = "#5a1539"
             app:met_floatingLabel="highlight"
             app:met_primaryColor="#982360"
             app:met_singleLineEllipsis="true" />

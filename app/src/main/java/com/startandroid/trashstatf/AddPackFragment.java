@@ -90,7 +90,7 @@ public class AddPackFragment extends Fragment implements AdapterView.OnItemSelec
         //выпадающий список с кодом переработки
         spinner2 = getView().findViewById(R.id.spinner3);
 
-        //заполняем первый выпадающий список массивом из trings
+        //заполняем первый выпадающий список массивом из strings
         ArrayAdapter<CharSequence> adapter1 = ArrayAdapter.createFromResource(getActivity(),R.array.typeOfPack,android.R.layout.simple_spinner_item);
         adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
@@ -104,6 +104,8 @@ public class AddPackFragment extends Fragment implements AdapterView.OnItemSelec
         addPackButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+
                 dbHelper = new DatabaseHelper(getActivity());
                 //считываем все введенные значения в поля формы
                 EditText product = getView().findViewById(R.id.productName);
@@ -113,10 +115,14 @@ public class AddPackFragment extends Fragment implements AdapterView.OnItemSelec
                 EditText amountPack =  getView().findViewById(R.id.amountPack);
                 String mes2 = amountPack.getText().toString();
 
+                if(!isFieldsValidate(mes,mes2)){
+                    Toast.makeText(getActivity(),"Вы не заполнили все поля",Toast.LENGTH_SHORT).show();
+                    return;
+                }
 
-                //потом они будут записываться в бд, и выводится в фрагменте статистика
-                String Text = mes+" "+spinner1Value+" "+spinner2Value+ " "+mes2;
-                Toast.makeText(getActivity(),Text,Toast.LENGTH_SHORT).show();
+
+                //String Text = mes+" "+spinner1Value+" "+spinner2Value+ " "+mes2;
+                //Toast.makeText(getActivity(),Text,Toast.LENGTH_SHORT).show();
                 loginPref = getActivity().getSharedPreferences("login", Context.MODE_PRIVATE);
                 String userLogin = loginPref.getString("UsersLogin","");
                 String user_lst_id = dbHelper.getUserLst_id(userLogin);
@@ -125,5 +131,14 @@ public class AddPackFragment extends Fragment implements AdapterView.OnItemSelec
         });
 
 
+    }
+
+    private boolean isFieldsValidate(String productName, String productAmount){
+        boolean flag = true;
+        if(productName.equals("")) flag = false;
+        if(productAmount.equals("")){
+            flag = false;
+        }
+        return flag;
     }
 }

@@ -268,7 +268,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         while(cursor.moveToNext()){
             res1 = cursor.getString(cursor.getColumnIndex("Amount"));
             res2 = cursor.getString(cursor.getColumnIndex(KEY_dict_recycleNumber));
-            txtData.append(res2+"                            "+res1+"\n");
+            txtData.append(res1+"                            "+res2+"\n");
         }
         cursor.close();
         return txtData;

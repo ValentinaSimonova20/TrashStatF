@@ -26,6 +26,7 @@
             app:met_floatingLabel="highlight"
             app:met_baseColor="#0056d3"
             app:met_primaryColor="#982360"
+            app:met_textColorHint = "#5a1539"
             app:met_singleLineEllipsis="true"/>
 
         <com.rengwuxian.materialedittext.MaterialEditText
@@ -41,6 +42,7 @@
 
             app:met_floatingLabel="highlight"
             app:met_baseColor="#0056d3"
+            app:met_textColorHint = "#5a1539"
             app:met_primaryColor="#982360"
             app:met_singleLineEllipsis="true"/>
 

@@ -65,9 +65,16 @@ public class GraphFragment extends Fragment {
             String[] tokens = dbHelper.viewStat(typeOfPack[i],user_lst_id).toString().split("\n");
             float[] result = new float[tokens.length];
             for(int j=0;j<tokens.length;j++){
-                //нужно обработать пустое значение чтобы ошибка не вылетала
-                result[j]=Float.parseFloat(tokens[j].split(" ")[0]);
+                if(tokens[j].split(" ")[0]==""){
+                    result[j] = 0;
+                }
+                else{
+                    result[j]=Float.parseFloat(tokens[j].split(" ")[0]);
+                }
+
             }
+
+
 
 
             yValeus.add(new BarEntry(i, result));
