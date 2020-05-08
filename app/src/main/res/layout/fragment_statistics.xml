@@ -27,7 +27,7 @@
             </TextView>
 
             <TextView
-                android:text="Код переработки      Кол-во"
+                android:text="Кол-во      Код переработки"
                 android:background="#FFE6E6"
                 android:textSize="15sp"
                 android:textColor="@color/colorPrimaryDark"

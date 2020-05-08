@@ -1,33 +1,102 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent" android:layout_height="match_parent"
-    android:background="@android:color/holo_red_light">
+    android:background="#FFE6E6">
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <LinearLayout
+        <TableLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical" >
+            android:stretchColumns="*"
+            android:background="#EBB4E4"
+            >
 
-            <TextView
-                android:id="@+id/textViewRes"
-                android:layout_width="wrap_content"
+
+            <TableRow
+                android:background="#FFE6E6"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:layout_marginEnd="316dp"
-                android:text="TextView" />
-        </LinearLayout>
-    </ScrollView>
+                android:layout_margin="2dip"
+                >
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Statistics Fragment"
-        android:textSize="30sp"
-        android:layout_centerInParent="true"/>
+                <TextView
+                    android:id="@+id/textViewRes"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginEnd="316dp"
+                    android:textColor="@color/colorPrimaryDark"/>
+            </TableRow>
+
+            <TableRow android:background="#FFE6E6" android:layout_margin="2dip">
+
+
+                <TextView
+                    android:id="@+id/textAdvice1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginEnd="316dp"
+
+                    android:textSize="25sp"
+                    android:text="@string/advice1"
+                    android:textColor="@color/colorPrimaryDark"/>
+            </TableRow>
+
+            <TableRow android:background="#FFE6E6" android:layout_margin="2dip">
+
+                <TextView
+                    android:id="@+id/textAdvice4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:layout_marginTop="15dp"
+                    android:layout_marginEnd="316dp"
+                    android:textSize="25sp"
+                    android:text="@string/advice4"
+                    android:textColor="@color/colorPrimaryDark"/>
+            </TableRow>
+
+
+            <TableRow android:background="#FFE6E6" android:layout_margin="2dip">
+
+                <TextView
+                    android:id="@+id/textAdvice2"
+                    android:layout_width="319dp"
+                    android:layout_height="wrap_content"
+
+                    android:layout_marginTop="15dp"
+                    android:layout_marginEnd="316dp"
+                    android:text="@string/advice2"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="25sp" />
+            </TableRow>
+
+            <TableRow android:background="#FFE6E6" android:layout_margin="2dip">
+
+
+                <TextView
+                    android:id="@+id/textAdvice3"
+                    android:layout_width="345dp"
+                    android:layout_height="72dp"
+
+                    android:layout_marginTop="15dp"
+                    android:layout_marginEnd="316dp"
+                    android:text="@string/advice3"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="25sp" />
+            </TableRow>
+
+
+        </TableLayout>
+
+
+    </ScrollView>
 
 
 </RelativeLayout>

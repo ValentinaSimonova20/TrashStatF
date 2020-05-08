@@ -29,6 +29,7 @@ public class PassFragment extends Fragment {
     Button authButton;
     SharedPreferences loginPref;
 
+
     RelativeLayout root2;
 
     @Nullable
@@ -73,6 +74,8 @@ public class PassFragment extends Fragment {
                     SharedPreferences.Editor ed = loginPref.edit();
                     ed.putString("UsersLogin",email.getText().toString());
                     ed.commit();
+
+
                     return;
                 }
                 else {

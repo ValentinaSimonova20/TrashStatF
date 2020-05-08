@@ -127,6 +127,7 @@ public class AddPackFragment extends Fragment implements AdapterView.OnItemSelec
                 String userLogin = loginPref.getString("UsersLogin","");
                 String user_lst_id = dbHelper.getUserLst_id(userLogin);
                 dbHelper.addProduct(mes,spinner1Value,spinner2Value,Integer.parseInt(mes2),user_lst_id,userLogin);
+                Toast.makeText(getActivity(),"Продукт добавлен!",Toast.LENGTH_SHORT).show();
             }
         });
 
