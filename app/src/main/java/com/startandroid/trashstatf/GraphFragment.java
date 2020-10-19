@@ -88,7 +88,7 @@ public class GraphFragment extends Fragment {
         set1.setColors(ColorTemplate.JOYFUL_COLORS);
 
         BarData data = new BarData(set1);
-        data.setValueFormatter(new MyValueFormatter());
+
 
 
         mChart.setData(data);

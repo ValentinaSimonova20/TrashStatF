@@ -15,6 +15,7 @@ import androidx.fragment.app.Fragment;
 import com.google.android.material.snackbar.Snackbar;
 import com.rengwuxian.materialedittext.MaterialEditText;
 
+
 public class RegisterFragment extends Fragment {
 
     DatabaseHelper dbHelper;

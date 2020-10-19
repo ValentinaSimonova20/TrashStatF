@@ -1,4 +1,5 @@
 package com.startandroid.trashstatf;
+//при использовании фрагментов не происходит создание новой страницы. На существующую страницу просто всталяется фрагмент. На одну страницу вставляем вторую страницу
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
