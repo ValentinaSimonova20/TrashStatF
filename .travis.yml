@@ -1,7 +1,6 @@
 
 language: android
 dist: trusty
-os: windows
 
 jdk:
   - oraclejdk11
