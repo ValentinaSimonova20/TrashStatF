@@ -38,7 +38,7 @@ android:
     - android-23
     - android-29
     
-     - extra-android-m2repository
+    - extra-android-m2repository
     
     - sys-img-armeabi-v7a-android-23
 
