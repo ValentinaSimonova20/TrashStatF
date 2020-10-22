@@ -24,4 +24,12 @@ public class ExampleInstrumentedTest {
 
         assertEquals("com.startandroid.trashstatf", appContext.getPackageName());
     }
+
+    @Test
+    public void useAppContext2() {
+        // Context of the app under test.
+        Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
+
+        assertEquals("com.startandroid.trashstatf", appContext.getPackageName());
+    }
 }
