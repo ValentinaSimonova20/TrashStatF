@@ -1,3 +1,9 @@
+
+[![Coverage Status](https://coveralls.io/repos/github/ValentinaSimonova20/TrashStatF/badge.svg?branch=master)](https://coveralls.io/github/ValentinaSimonova20/TrashStatF?branch=master)
+
+
+
+
 # TrashStatF
 # Инструкция работы
 1. Запросить создание новой ветки у team-lead-а
@@ -7,4 +13,3 @@
 4. Для того, чтобы внести изменения, необходимо запускать команду git commit -m "<описание изменений>" в консоли git bash в репозитории проекта
 5. Для того, чтобы ваши изменения отображались в удаленном репозитории - выполнить команду git push origin <название вашей ветки>
 6. Согласовать внесение ваших изменений в ветку dev (если вы закончили работу над подзадачей) с team-lead-ом (team-lead принимает либо просит доработать ваши изменения)
-
