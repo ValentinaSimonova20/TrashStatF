@@ -70,6 +70,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 break;
             case R.id.nav_reg:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new RegisterFragment()).commit();
+                break;
+            case R.id.nav_settings:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new SettingsFragment()).commit();
 
         }
 
