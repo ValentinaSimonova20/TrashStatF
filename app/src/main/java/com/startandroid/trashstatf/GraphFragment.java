@@ -25,7 +25,6 @@ public class GraphFragment extends Fragment {
 
     private BarChart mChart;
     private DatabaseHelper dbHelper;
-    SharedPreferences loginPref;
 
     @Nullable
     @Override
@@ -40,7 +39,7 @@ public class GraphFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        mChart = (BarChart)getView().findViewById(R.id.chart1);
+        mChart = getView().findViewById(R.id.chart1);
 
         mChart.setMaxVisibleValueCount(20);
 
@@ -49,10 +48,10 @@ public class GraphFragment extends Fragment {
 
     }
 
-    public void setData(int count){
-        loginPref = getActivity().getSharedPreferences("login", Context.MODE_PRIVATE);
+    private void setData(int count){
+        SharedPreferences loginPref = getActivity().getSharedPreferences("login", Context.MODE_PRIVATE);
         String userLogin = loginPref.getString("UsersLogin","");
-        String user_lst_id = dbHelper.getUserLst_id(userLogin);
+        String userLstId = dbHelper.getUserLstId(userLogin);
         ArrayList<BarEntry> yValeus = new ArrayList<>();
 
         String[] typeOfPack =getContext().getResources().getStringArray(R.array.typeOfPack);
@@ -62,10 +61,10 @@ public class GraphFragment extends Fragment {
         //Отображение на графике информации об использовании упаковки(6 столбцов для каждого типа. в каждом столбце отображаются разными цветами количество разных кодов переработки)
         for(int i=0; i<count;i++){
 
-            String[] tokens = dbHelper.viewStat(typeOfPack[i],user_lst_id).toString().split("\n");
+            String[] tokens = dbHelper.viewStat(typeOfPack[i],userLstId).toString().split("\n");
             float[] result = new float[tokens.length];
             for(int j=0;j<tokens.length;j++){
-                if(tokens[j].split(" ")[0]==""){
+                if(tokens[j].split(" ")[0].equals("")){
                     result[j] = 0;
                 }
                 else{
@@ -84,13 +83,9 @@ public class GraphFragment extends Fragment {
 
         set1 = new BarDataSet(yValeus,"Использование упаковок");
         set1.setDrawIcons(false);
-        //set1.setStackLabels(new String[]{"Children","Adults","elders"});
         set1.setColors(ColorTemplate.JOYFUL_COLORS);
 
         BarData data = new BarData(set1);
-
-
-
         mChart.setData(data);
         mChart.setFitBars(true);
         mChart.invalidate();

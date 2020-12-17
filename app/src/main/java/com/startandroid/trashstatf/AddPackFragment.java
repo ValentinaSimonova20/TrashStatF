@@ -12,21 +12,18 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
-import android.widget.Toolbar;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 public class AddPackFragment extends Fragment implements AdapterView.OnItemSelectedListener {
 
-    Spinner spinner1,spinner2;
-    ArrayAdapter<CharSequence> adapter2;
-    Button addPackButton;
+    private Spinner spinner1;
+    private Spinner spinner2;
+    private ArrayAdapter<CharSequence> adapter2;
 
-    DatabaseHelper dbHelper;
-    SharedPreferences loginPref;
+    private DatabaseHelper dbHelper;
+    private SharedPreferences loginPref;
 
     @Nullable
     @Override
@@ -39,10 +36,6 @@ public class AddPackFragment extends Fragment implements AdapterView.OnItemSelec
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         String packType = parent.getItemAtPosition(position).toString();
         switch(packType) {
-            case "Пластики":
-                adapter2 = ArrayAdapter.createFromResource(getActivity(),R.array.RecycleCodesPlastic,android.R.layout.simple_spinner_item);
-                createSecondSpinner();
-                break;
             case "Стекло":
                 adapter2 = ArrayAdapter.createFromResource(getActivity(),R.array.RecycleCodesGlass,android.R.layout.simple_spinner_item);
                 createSecondSpinner();
@@ -63,12 +56,15 @@ public class AddPackFragment extends Fragment implements AdapterView.OnItemSelec
                 adapter2 = ArrayAdapter.createFromResource(getActivity(),R.array.RecycleCodesOrg,android.R.layout.simple_spinner_item);
                 createSecondSpinner();
                 break;
+            default:
+                adapter2 = ArrayAdapter.createFromResource(getActivity(),R.array.RecycleCodesPlastic,android.R.layout.simple_spinner_item);
+                createSecondSpinner();
         }
 
 
     }
 
-    public void createSecondSpinner(){
+    private void createSecondSpinner(){
         adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         adapter2.notifyDataSetChanged();
         spinner2.setAdapter(adapter2);
@@ -76,8 +72,10 @@ public class AddPackFragment extends Fragment implements AdapterView.OnItemSelec
     }
 
 
+
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
+        // необходимый метод для реализации интерфейса
     }
 
     @Override
@@ -100,7 +98,7 @@ public class AddPackFragment extends Fragment implements AdapterView.OnItemSelec
 
 
         //кнопка "Добавить".
-        addPackButton = getView().findViewById(R.id.button);
+        Button addPackButton = getView().findViewById(R.id.button);
         addPackButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -120,13 +118,10 @@ public class AddPackFragment extends Fragment implements AdapterView.OnItemSelec
                     return;
                 }
 
-
-                //String Text = mes+" "+spinner1Value+" "+spinner2Value+ " "+mes2;
-                //Toast.makeText(getActivity(),Text,Toast.LENGTH_SHORT).show();
                 loginPref = getActivity().getSharedPreferences("login", Context.MODE_PRIVATE);
                 String userLogin = loginPref.getString("UsersLogin","");
-                String user_lst_id = dbHelper.getUserLst_id(userLogin);
-                dbHelper.addProduct(mes,spinner1Value,spinner2Value,Integer.parseInt(mes2),user_lst_id,userLogin);
+                String userLstId = dbHelper.getUserLstId(userLogin);
+                dbHelper.addProduct(mes,spinner1Value,spinner2Value,Integer.parseInt(mes2),userLstId,userLogin);
                 Toast.makeText(getActivity(),"Продукт добавлен!",Toast.LENGTH_SHORT).show();
             }
         });
