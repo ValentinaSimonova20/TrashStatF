@@ -51,3 +51,21 @@ jacoco {
     toolVersion = "0.7.5.201505241946"
 }
 
+apply plugin: 'org.sonarqube'
+
+
+sonarqube
+        {
+            properties
+                    {
+                        property "sonar.projectName", "developerlibs"
+                        property "sonar.projectKey", "com.devlibs.android"
+                        property "sonar.language", "java"
+                        property "sonar.sources", "src/main/java/"
+                        property "sonar.binaries", "build"
+                        property "sonar.sourceEncoding", "UTF-8"
+                        property "sonar.login", "admin"
+                        property "sonar.password", "emenup95"
+                    }
+        }
+
