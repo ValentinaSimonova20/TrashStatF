@@ -18,16 +18,14 @@ import com.rengwuxian.materialedittext.MaterialEditText;
 
 public class RegisterFragment extends Fragment {
 
-    DatabaseHelper dbHelper;
+    private DatabaseHelper dbHelper;
 
-    MaterialEditText email;
-    MaterialEditText pass;
-    MaterialEditText name;
-    MaterialEditText phone;
+    private MaterialEditText email;
+    private MaterialEditText pass;
+    private MaterialEditText name;
+    private MaterialEditText phone;
 
-    Button registerButton;
-
-    RelativeLayout root;
+    private RelativeLayout root;
 
     @Nullable
     @Override
@@ -48,27 +46,27 @@ public class RegisterFragment extends Fragment {
         phone = getView().findViewById(R.id.phoneField);
         root = getView().findViewById(R.id.root_element);
 
-        registerButton = getView().findViewById(R.id.registerButton);
+        Button registerButton = getView().findViewById(R.id.registerButton);
 
         View.OnClickListener listenerButton = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(TextUtils.isEmpty(email.getText().toString())){
-                    Snackbar.make(root, "Введите вашу почту", Snackbar.LENGTH_SHORT).show();
+                    Snackbar.make(root, "Введите вашу почту", com.google.android.material.snackbar.BaseTransientBottomBar.LENGTH_SHORT).show();
                     return;
                 }
                 if(TextUtils.isEmpty(name.getText().toString())){
-                    Snackbar.make(root, "Введите ваше имя", Snackbar.LENGTH_SHORT).show();
+                    Snackbar.make(root, "Введите ваше имя", com.google.android.material.snackbar.BaseTransientBottomBar.LENGTH_SHORT).show();
                     return;
                 }
 
                 if(TextUtils.isEmpty(phone.getText().toString())){
-                    Snackbar.make(root, "Введите ваш телефон", Snackbar.LENGTH_SHORT).show();
+                    Snackbar.make(root, "Введите ваш телефон", com.google.android.material.snackbar.BaseTransientBottomBar.LENGTH_SHORT).show();
                     return;
                 }
 
                 if(pass.getText().toString().length() < 5){
-                    Snackbar.make(root, "Введите пароль, который более 5 символов", Snackbar.LENGTH_SHORT).show();
+                    Snackbar.make(root, "Введите пароль, который более 5 символов", com.google.android.material.snackbar.BaseTransientBottomBar.LENGTH_SHORT).show();
                     return;
                 }
 
@@ -86,11 +84,10 @@ public class RegisterFragment extends Fragment {
                  //Проверка на то, есть ли пользователь с таким логином в бд
                 if(dbHelper.isUserExists(user.getEmail())){
                     //Если есть, то не добавляем в таблицу Users
-                    Snackbar.make(root,"Данный пользователь уже зарегестрирован! Введите другой email", Snackbar.LENGTH_SHORT).show();
-                    return;
+                    Snackbar.make(root,"Данный пользователь уже зарегестрирован! Введите другой email", com.google.android.material.snackbar.BaseTransientBottomBar.LENGTH_SHORT).show();
                 }
                 else{
-                    Snackbar.make(root,"Вы успешно зарегестрировались. Перейдите в пункт меню авторизация для продолжения работы под своей учетной записью.", Snackbar.LENGTH_SHORT).show();
+                    Snackbar.make(root,"Вы успешно зарегестрировались. Перейдите в пункт меню авторизация для продолжения работы под своей учетной записью.", com.google.android.material.snackbar.BaseTransientBottomBar.LENGTH_SHORT).show();
                     dbHelper.addNewUser(user.getPass(),user.getEmail(),user.getPhone(),user.getName());
                 }
 

@@ -5,55 +5,54 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-
 import androidx.annotation.Nullable;
 
 
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 
-    public static String DATABASE_NAME ="PackInformationDB";
+    private static final String DATABASE_NAME ="PackInformationDB";
     private static final int DATABASE_VERSION = 1;
-    public static final String TABLE_USER = "users";
-    public static final String TABLE_DICT = "dictionary";
+    private static final String TABLE_USER = "users";
+    private static final String TABLE_DICT = "dictionary";
     private static final String TABLE_PRODUCTS = "products";
-    private static final String TABLE_LstOfProducts = "list_of_products";
-    private static final String KEY_user_login = "user_login";
-    private static final String KEY_user_password = "user_password";
-    private static final String KEY_user_lstid = "user_lst_id";
-    private static final String KEY_user_name = "user_name";
-    private static final String KEY_user_mobile = "user_mobile";
-    private static final String KEY_user_amountP = "user_lst_amount";
-    private static final String KEY_product_id = "product_id";
-    private static final String KEY_product_name = "product_name";
-    private static final String KEY_dict_id = "dict_id";
-    private static final String KEY_dict_type = "dict_type";
-    private static final String KEY_dict_recycleNumber = "dict_recycleNumber";
+    private static final String TABLE_PRODUCTS_LST = "list_of_products";
+    private static final String KEY_USER_LOGIN = "user_login";
+    private static final String KEY_USER_PASSWORD = "user_password";
+    private static final String KEY_USER_LST_ID = "user_lst_id";
+    private static final String KEY_USERNAME = "user_name";
+    private static final String KEY_USER_MOBILE = "user_mobile";
+    private static final String KEY_USER_PRODUCT_AMOUNT = "user_lst_amount";
+    private static final String KEY_PRODUCT_ID = "product_id";
+    private static final String KEY_PRODUCT_NAME = "product_name";
+    private static final String KEY_DICT_ID = "dict_id";
+    private static final String KEY_DICT_TYPE = "dict_type";
+    private static final String KEY_DICT_RECYCLE_NUMBER = "dict_recycleNumber";
 
     private Context context;
 
     //Create tables
 
     private static final String CREATE_TABLE_USERS = "CREATE TABLE "+ TABLE_USER +
-                                                    "(" + KEY_user_login + " TEXT,"+
-                                                    KEY_user_password+" TEXT," +
-                                                    KEY_user_lstid+" INTEGER PRIMARY KEY AUTOINCREMENT,"+
-                                                    KEY_user_name+" TEXT,"+
-                                                    KEY_user_mobile+" TEXT );";
+                                                    "(" + KEY_USER_LOGIN + " TEXT,"+
+                                                    KEY_USER_PASSWORD+" TEXT," +
+                                                    KEY_USER_LST_ID+" INTEGER PRIMARY KEY AUTOINCREMENT,"+
+                                                    KEY_USERNAME+" TEXT,"+
+                                                    KEY_USER_MOBILE+" TEXT );";
 
     private static final String CREATE_TABLE_DICT = "CREATE TABLE "+ TABLE_DICT +
-            "(" + KEY_dict_id + "  INTEGER PRIMARY KEY AUTOINCREMENT,"+
-            KEY_dict_type+" TEXT," +
-            KEY_dict_recycleNumber+" TEXT );";
+            "(" + KEY_DICT_ID + "  INTEGER PRIMARY KEY AUTOINCREMENT,"+
+            KEY_DICT_TYPE+" TEXT," +
+            KEY_DICT_RECYCLE_NUMBER+" TEXT );";
 
     private static final String CREATE_TABLE_PRODUCTS = "CREATE TABLE "+ TABLE_PRODUCTS +
-            "(" + KEY_product_id + " INTEGER PRIMARY KEY AUTOINCREMENT,"+
-            KEY_product_name+" TEXT," +
-            KEY_dict_id+" INTEGER );";
+            "(" + KEY_PRODUCT_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"+
+            KEY_PRODUCT_NAME+" TEXT," +
+            KEY_DICT_ID+" INTEGER );";
 
-    private static final String CREATE_TABLE_LstOfProducts = "CREATE TABLE "+ TABLE_LstOfProducts +
-            "(" + KEY_user_lstid  + " INTEGER,"+
-            KEY_product_id+ " INTEGER,"+KEY_user_amountP+" INTEGER );";
+    private static final String CREATE_TABLE_LST_OF_PRODUCTS = "CREATE TABLE "+ TABLE_PRODUCTS_LST +
+            "(" + KEY_USER_LST_ID  + " INTEGER,"+
+            KEY_PRODUCT_ID+ " INTEGER,"+KEY_USER_PRODUCT_AMOUNT+" INTEGER );";
 
 
 
@@ -67,14 +66,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL(CREATE_TABLE_USERS);
         db.execSQL(CREATE_TABLE_DICT);
         db.execSQL(CREATE_TABLE_PRODUCTS);
-        db.execSQL(CREATE_TABLE_LstOfProducts);
+        db.execSQL(CREATE_TABLE_LST_OF_PRODUCTS);
         createDict(db);
         addOneUser(db);
     }
 
-    public boolean isUserExists(String login){
+    boolean isUserExists(String login){
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.rawQuery("SELECT * FROM "+TABLE_USER+" WHERE "+KEY_user_login+"='"+login+"'",null);
+        Cursor cursor = db.rawQuery("SELECT * FROM "+TABLE_USER+" WHERE "+KEY_USER_LOGIN+"='"+login+"'",null);
         if(cursor.moveToNext()){
             cursor.close();
             return true;
@@ -83,9 +82,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return false;
     }
 
-    public boolean isPassCorrect(String login, String pass){
+    private boolean isPassCorrect(String login, String pass){
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursore = db.rawQuery("SELECT * FROM "+TABLE_USER+" WHERE "+KEY_user_login+"='"+login+"'"+" AND "+KEY_user_password+"='"+pass+"'",null);
+        Cursor cursore = db.rawQuery("SELECT * FROM "+TABLE_USER+" WHERE "+KEY_USER_LOGIN+"='"+login+"'"+" AND "+KEY_USER_PASSWORD+"='"+pass+"'",null);
         if(cursore.moveToNext()){
             cursore.close();
             return true;
@@ -94,54 +93,54 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return false;
     }
 
-    public void addNewUser(String password, String email, String number, String name){
+    void addNewUser(String password, String email, String number, String name){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put(KEY_user_login,email);
-        values.put(KEY_user_password,password);
-        values.put(KEY_user_mobile,number);
-        values.put(KEY_user_name,name);
+        values.put(KEY_USER_LOGIN,email);
+        values.put(KEY_USER_PASSWORD,password);
+        values.put(KEY_USER_MOBILE,number);
+        values.put(KEY_USERNAME,name);
         db.insert(TABLE_USER , null, values);
     }
 
-    public boolean authUser(String email, String pass){
+    boolean authUser(String email, String pass){
         if(isUserExists(email)){
             return isPassCorrect(email, pass);
         }
         return false;
     }
 
-    public String getUserLst_id(String login){
+    String getUserLstId(String login){
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursore = db.rawQuery("SELECT "+KEY_user_lstid+" FROM "+TABLE_USER+" WHERE "+KEY_user_login+"='"+login+"'",null);
+        Cursor cursore = db.rawQuery("SELECT "+KEY_USER_LST_ID+" FROM "+TABLE_USER+" WHERE "+KEY_USER_LOGIN+"='"+login+"'",null);
         cursore.moveToNext();
-        String Lst_id;
-        Lst_id = cursore.getString(cursore.getColumnIndex(KEY_user_lstid));
-        return Lst_id;
+        String LstId;
+        LstId = cursore.getString(cursore.getColumnIndex(KEY_USER_LST_ID));
+        return LstId;
     }
 
 
 
 
 
-    public void addProduct(String productName,String packType,String recycleCode,int amount, String userLst_id, String userLogin){
+    void addProduct(String productName, String packType, String recycleCode, int amount, String userLstId, String userLogin){
         //Проверяем есть ли данный продукт в таблице продуктов
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(
                 "SELECT *" +" FROM " +TABLE_PRODUCTS+
-                " WHERE " +KEY_product_name+"='"+productName+"'"+" AND "+KEY_dict_id+
-                "=(SELECT "+KEY_dict_id+" FROM "+TABLE_DICT+" WHERE "+KEY_dict_type+"='"+packType+"'"+" AND "+KEY_dict_recycleNumber+"='"+recycleCode+"');" ,null);
+                " WHERE " +KEY_PRODUCT_NAME+"='"+productName+"'"+" AND "+KEY_DICT_ID+
+                "=(SELECT "+KEY_DICT_ID+" FROM "+TABLE_DICT+" WHERE "+KEY_DICT_TYPE+"='"+packType+"'"+" AND "+KEY_DICT_RECYCLE_NUMBER+"='"+recycleCode+"');" ,null);
 
         //если нет, то добавляем его
         if(!cursor.moveToNext()){
 
             ContentValues values = new ContentValues();
             //Выбираем ID из таблицы dict(таблица dict id-type-recyclecode)
-            Cursor cursor2 = db.rawQuery("SELECT "+KEY_dict_id+" FROM "+TABLE_DICT+" WHERE "+KEY_dict_type+"='"+packType+"' AND "+KEY_dict_recycleNumber+"='"+recycleCode+"'",null);
+            Cursor cursor2 = db.rawQuery("SELECT "+KEY_DICT_ID+" FROM "+TABLE_DICT+" WHERE "+KEY_DICT_TYPE+"='"+packType+"' AND "+KEY_DICT_RECYCLE_NUMBER+"='"+recycleCode+"'",null);
             cursor2.moveToNext();
-            String dict_id = cursor2.getString(cursor2.getColumnIndex(KEY_dict_id));
-            values.put(KEY_product_name,productName);
-            values.put(KEY_dict_id,dict_id);
+            String dictId = cursor2.getString(cursor2.getColumnIndex(KEY_DICT_ID));
+            values.put(KEY_PRODUCT_NAME,productName);
+            values.put(KEY_DICT_ID,dictId);
             //добавление продукта
             db.insert(TABLE_PRODUCTS,null,values);
             cursor2.close();
@@ -150,38 +149,38 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         //заполняем таблицу listOfProduct(id list-id product - amount)
 
         Cursor cursor3 = db.rawQuery(
-                "SELECT "+ KEY_product_id+" FROM " +TABLE_PRODUCTS+
-                        " WHERE " +KEY_product_name+"='"+productName+"' AND "+KEY_dict_id+
-                        "=(SELECT "+KEY_dict_id+" FROM "+TABLE_DICT+" WHERE "+KEY_dict_type+"='"+packType+"' AND "+KEY_dict_recycleNumber+"='"+recycleCode+"');" ,null);
+                "SELECT "+ KEY_PRODUCT_ID+" FROM " +TABLE_PRODUCTS+
+                        " WHERE " +KEY_PRODUCT_NAME+"='"+productName+"' AND "+KEY_DICT_ID+
+                        "=(SELECT "+KEY_DICT_ID+" FROM "+TABLE_DICT+" WHERE "+KEY_DICT_TYPE+"='"+packType+"' AND "+KEY_DICT_RECYCLE_NUMBER+"='"+recycleCode+"');" ,null);
         cursor3.moveToNext();
-        String product_id = cursor3.getString(cursor3.getColumnIndex(KEY_product_id));
+        String productId = cursor3.getString(cursor3.getColumnIndex(KEY_PRODUCT_ID));
         cursor3.close();
 
-        Cursor cursor5 = db.rawQuery("SELECT "+KEY_user_amountP+" FROM "+TABLE_LstOfProducts+" WHERE "+KEY_product_id+"='"+product_id+"' AND "+KEY_user_lstid+"="+userLst_id,null);
+        Cursor cursor5 = db.rawQuery("SELECT "+KEY_USER_PRODUCT_AMOUNT+" FROM "+TABLE_PRODUCTS_LST+" WHERE "+KEY_PRODUCT_ID+"='"+productId+"' AND "+KEY_USER_LST_ID+"="+userLstId,null);
 
-        Cursor cursor4 = db.rawQuery("SELECT "+KEY_user_lstid+" FROM "+TABLE_USER+
-                " WHERE "+KEY_user_login+"='"+userLogin+"'",null);
+        Cursor cursor4 = db.rawQuery("SELECT "+KEY_USER_LST_ID+" FROM "+TABLE_USER+
+                " WHERE "+KEY_USER_LOGIN+"='"+userLogin+"'",null);
         cursor4.moveToNext();
-        String lst_id = cursor4.getString(cursor4.getColumnIndex(KEY_user_lstid));
+        String lstId = cursor4.getString(cursor4.getColumnIndex(KEY_USER_LST_ID));
         cursor4.close();
 
 
         ContentValues values2 = new ContentValues();
-        values2.put(KEY_user_lstid,lst_id);
-        values2.put(KEY_product_id,product_id);
+        values2.put(KEY_USER_LST_ID,lstId);
+        values2.put(KEY_PRODUCT_ID,productId);
 
         //обновление lstid, если продукт в данном списке id уже есть
         if (cursor5.moveToNext()){
-            int amountP = cursor5.getInt(cursor5.getColumnIndex(KEY_user_amountP));
+            int amountP = cursor5.getInt(cursor5.getColumnIndex(KEY_USER_PRODUCT_AMOUNT));
             amount+=amountP;
-            values2.put(KEY_user_amountP,amount);
-            String where = KEY_product_id + "='" + product_id+"' AND "+KEY_user_lstid+"="+userLst_id;
-            db.update(TABLE_LstOfProducts,values2,where,null);
+            values2.put(KEY_USER_PRODUCT_AMOUNT,amount);
+            String where = KEY_PRODUCT_ID + "='" + productId+"' AND "+KEY_USER_LST_ID+"="+userLstId;
+            db.update(TABLE_PRODUCTS_LST,values2,where,null);
         }
         else {
 
-            values2.put(KEY_user_amountP,amount);
-            db.insert(TABLE_LstOfProducts, null, values2);
+            values2.put(KEY_USER_PRODUCT_AMOUNT,amount);
+            db.insert(TABLE_PRODUCTS_LST, null, values2);
         }
         cursor5.close();
     }
@@ -191,10 +190,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     //Добавляем одного тестового пользователя. Будет использоваться до реализации регистрации
 
-    public void addOneUser(SQLiteDatabase db){
+    private void addOneUser(SQLiteDatabase db){
         ContentValues values = new ContentValues();
-        values.put(KEY_user_login,"valentina");
-        values.put(KEY_user_password,"1234");
+        values.put(KEY_USER_LOGIN,"valentina");
+        values.put(KEY_USER_PASSWORD,"1234");
         db.insert(TABLE_USER , null, values);
     }
 
@@ -202,25 +201,25 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 
     //создаем словарь с типами упаковок и их кодами переработок
-    public void createDict(SQLiteDatabase db){
+    private void createDict(SQLiteDatabase db){
 
         //значения берем из ресурсов
-        String[] typeOfPack =context.getResources().getStringArray(R.array.typeOfPack);   ;
-        String[] recycleCodesPl =context.getResources().getStringArray(R.array.RecycleCodesPlastic);   ;
-        String[] recycleCodesG =context.getResources().getStringArray(R.array.RecycleCodesGlass);   ;
-        String[] recycleCodesPap =context.getResources().getStringArray(R.array.RecycleCodesPaper);   ;
-        String[] recycleCodesM =context.getResources().getStringArray(R.array.RecycleCodesMetals);   ;
-        String[] recycleCodesOrg =context.getResources().getStringArray(R.array.RecycleCodesOrg);   ;
+        String[] typeOfPack =context.getResources().getStringArray(R.array.typeOfPack);
+        String[] recycleCodesPl =context.getResources().getStringArray(R.array.RecycleCodesPlastic);
+        String[] recycleCodesG =context.getResources().getStringArray(R.array.RecycleCodesGlass);
+        String[] recycleCodesPap =context.getResources().getStringArray(R.array.RecycleCodesPaper);
+        String[] recycleCodesM =context.getResources().getStringArray(R.array.RecycleCodesMetals);
+        String[] recycleCodesOrg =context.getResources().getStringArray(R.array.RecycleCodesOrg);
         String[] recycleCodesComp =context.getResources().getStringArray(R.array.RecycleCodesComp);
-        String[][] recycleCodes = { recycleCodesPl, recycleCodesG, recycleCodesM, recycleCodesComp, recycleCodesPap,recycleCodesOrg };;
+        String[][] recycleCodes = { recycleCodesPl, recycleCodesG, recycleCodesM, recycleCodesComp, recycleCodesPap,recycleCodesOrg };
 
 
         for (int i=0;i<typeOfPack.length;i++)
         {
             for(String recycleArrayItem: recycleCodes[i]){
                 ContentValues values = new ContentValues();
-                values.put(KEY_dict_type,typeOfPack[i]);
-                values.put(KEY_dict_recycleNumber,recycleArrayItem);
+                values.put(KEY_DICT_TYPE,typeOfPack[i]);
+                values.put(KEY_DICT_RECYCLE_NUMBER,recycleArrayItem);
                 db.insert(TABLE_DICT , null, values);
             }
         }
@@ -231,20 +230,24 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-
+        // метод необходим для использования бибилотеки sqlite
     }
 
     public StringBuilder viewUsers(){
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery("SELECT * FROM " +TABLE_USER+" " ,null);
-        String res1,res2,res0,res3,res4;
+        String res1;
+        String res2;
+        String res0;
+        String res3;
+        String res4;
         StringBuilder txtData = new StringBuilder();
         while(cursor.moveToNext()) {
-            res0 = cursor.getString(cursor.getColumnIndex( KEY_user_login));
-            res1 = cursor.getString(cursor.getColumnIndex( KEY_user_password));
-            res2 = cursor.getString(cursor.getColumnIndex(KEY_user_lstid));
-            res3 = cursor.getString(cursor.getColumnIndex(KEY_user_name));
-            res4 = cursor.getString(cursor.getColumnIndex(KEY_user_mobile));
+            res0 = cursor.getString(cursor.getColumnIndex(KEY_USER_LOGIN));
+            res1 = cursor.getString(cursor.getColumnIndex(KEY_USER_PASSWORD));
+            res2 = cursor.getString(cursor.getColumnIndex(KEY_USER_LST_ID));
+            res3 = cursor.getString(cursor.getColumnIndex(KEY_USERNAME));
+            res4 = cursor.getString(cursor.getColumnIndex(KEY_USER_MOBILE));
             txtData.append(res0+" "+res1 + " "+res2+" "+res3+" "+res4+"\n");
         }
         cursor.close();
@@ -252,21 +255,20 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
 
 
-
-
-    public StringBuilder viewStat(String type,String userLst_id){
-        String query = "SELECT sum("+KEY_user_amountP+") as Amount, "+KEY_dict_recycleNumber+" FROM "+TABLE_PRODUCTS+" INNER JOIN "+TABLE_LstOfProducts+" on "+TABLE_LstOfProducts+"."+
-                KEY_product_id+"="+TABLE_PRODUCTS+"."+KEY_product_id+" INNER JOIN "+TABLE_DICT+" on "+TABLE_PRODUCTS+"."+KEY_dict_id+"="+TABLE_DICT+"."+KEY_dict_id+
-                " WHERE "+KEY_dict_type+"='"+type+"'"+" AND "+KEY_user_lstid+"="+userLst_id+" GROUP BY "+KEY_dict_recycleNumber;
+    StringBuilder viewStat(String type, String userLstId){
+        String query = "SELECT sum("+KEY_USER_PRODUCT_AMOUNT+") as Amount, "+KEY_DICT_RECYCLE_NUMBER+" FROM "+TABLE_PRODUCTS+" INNER JOIN "+TABLE_PRODUCTS_LST+" on "+TABLE_PRODUCTS_LST+"."+
+                KEY_PRODUCT_ID+"="+TABLE_PRODUCTS+"."+KEY_PRODUCT_ID+" INNER JOIN "+TABLE_DICT+" on "+TABLE_PRODUCTS+"."+KEY_DICT_ID+"="+TABLE_DICT+"."+KEY_DICT_ID+
+                " WHERE "+KEY_DICT_TYPE+"='"+type+"'"+" AND "+KEY_USER_LST_ID+"="+userLstId+" GROUP BY "+KEY_DICT_RECYCLE_NUMBER;
 
 
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(query,null);
-        String res1,res2;
+        String res1;
+        String res2;
         StringBuilder txtData = new StringBuilder();
         while(cursor.moveToNext()){
             res1 = cursor.getString(cursor.getColumnIndex("Amount"));
-            res2 = cursor.getString(cursor.getColumnIndex(KEY_dict_recycleNumber));
+            res2 = cursor.getString(cursor.getColumnIndex(KEY_DICT_RECYCLE_NUMBER));
             txtData.append(res1+"                            "+res2+"\n");
         }
         cursor.close();

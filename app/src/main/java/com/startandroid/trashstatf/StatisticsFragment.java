@@ -13,14 +13,7 @@ import androidx.fragment.app.Fragment;
 
 public class StatisticsFragment extends Fragment {
 
-    DatabaseHelper dbHelper;
-    TextView txtViewPlastic;
-    TextView txtViewMetalls;
-    TextView txtViewPaper;
-    TextView txtViewOrg;
-    TextView txtViewComp;
-    TextView txtViewGlass;
-    SharedPreferences loginPref;
+    private DatabaseHelper dbHelper;
 
     @Nullable
     @Override
@@ -34,29 +27,29 @@ public class StatisticsFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        loginPref = getActivity().getSharedPreferences("login", Context.MODE_PRIVATE);
+        SharedPreferences loginPref = getActivity().getSharedPreferences("login", Context.MODE_PRIVATE);
         String userLogin = loginPref.getString("UsersLogin","");
-        String user_lst_id = dbHelper.getUserLst_id(userLogin);
-        txtViewPlastic = getView().findViewById(R.id.textViewPlastics);
-        txtViewPlastic.setText(dbHelper.viewStat("Пластики",user_lst_id).toString());
+        String userLstId = dbHelper.getUserLstId(userLogin);
+        TextView txtViewPlastic = getView().findViewById(R.id.textViewPlastics);
+        txtViewPlastic.setText(dbHelper.viewStat("Пластики",userLstId).toString());
 
 
         //Отображение информации по упаковкам в виде - номер переработки - количество
 
-        txtViewPaper = getView().findViewById(R.id.textViewPaper);
-        txtViewPaper.setText(dbHelper.viewStat("Бумага",user_lst_id).toString());
+        TextView txtViewPaper = getView().findViewById(R.id.textViewPaper);
+        txtViewPaper.setText(dbHelper.viewStat("Бумага",userLstId).toString());
 
-        txtViewMetalls = getView().findViewById(R.id.textViewMetals);
-        txtViewMetalls.setText(dbHelper.viewStat("Металлы",user_lst_id).toString());
+        TextView txtViewMetalls = getView().findViewById(R.id.textViewMetals);
+        txtViewMetalls.setText(dbHelper.viewStat("Металлы",userLstId).toString());
 
-        txtViewOrg = getView().findViewById(R.id.textViewOrg);
-        txtViewOrg.setText(dbHelper.viewStat("Органические материалы",user_lst_id).toString());
+        TextView txtViewOrg = getView().findViewById(R.id.textViewOrg);
+        txtViewOrg.setText(dbHelper.viewStat("Органические материалы",userLstId).toString());
 
-        txtViewComp = getView().findViewById(R.id.textViewComp);
-        txtViewComp.setText(dbHelper.viewStat("Композиционный материалы",user_lst_id).toString());
+        TextView txtViewComp = getView().findViewById(R.id.textViewComp);
+        txtViewComp.setText(dbHelper.viewStat("Композиционный материалы",userLstId).toString());
 
-        txtViewGlass = getView().findViewById(R.id.textViewGlass);
-        txtViewGlass.setText(dbHelper.viewStat("Стекло",user_lst_id).toString());
+        TextView txtViewGlass = getView().findViewById(R.id.textViewGlass);
+        txtViewGlass.setText(dbHelper.viewStat("Стекло",userLstId).toString());
 
 
 

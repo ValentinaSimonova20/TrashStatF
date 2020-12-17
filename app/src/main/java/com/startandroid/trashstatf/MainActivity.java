@@ -53,9 +53,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         //переключатель между фрагментами
         switch (item.getItemId()) {
-            case R.id.nav_addPack:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new AddPackFragment()).commit();
-                break;
             case R.id.nav_advice:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new AdviceFragment()).commit();
                 break;
@@ -73,6 +70,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 break;
             case R.id.nav_settings:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new SettingsFragment()).commit();
+                break;
+            default:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new AddPackFragment()).commit();
 
         }
 

@@ -18,8 +18,8 @@ public class SettingsFragment extends Fragment {
 
     private Switch aSwitch;
 
-    public static final String MyPREFERENCE = "nightModePref";
-    public static final String KEY_ISNIGHTMODE = "isNightMode";
+    private static final String MY_PREFERENCE = "nightModePref";
+    private static final String KEY_IS_NIGHT_MODE = "isNightMode";
 
     private SharedPreferences sharedPreferences;
 
@@ -39,7 +39,7 @@ public class SettingsFragment extends Fragment {
 
         aSwitch =getView().findViewById(R.id.switch_button);
 
-        sharedPreferences = getActivity().getSharedPreferences(MyPREFERENCE, Context.MODE_PRIVATE);
+        sharedPreferences = getActivity().getSharedPreferences(MY_PREFERENCE, Context.MODE_PRIVATE);
 
         checkedNightModeActivity();
 
@@ -64,14 +64,14 @@ public class SettingsFragment extends Fragment {
     private void saveNightModeState(boolean nightMode) {
         SharedPreferences.Editor editor = sharedPreferences.edit();
 
-        editor.putBoolean(KEY_ISNIGHTMODE, nightMode);
+        editor.putBoolean(KEY_IS_NIGHT_MODE, nightMode);
 
         editor.apply();
 
     }
 
     private void checkedNightModeActivity(){
-        if(sharedPreferences.getBoolean(KEY_ISNIGHTMODE, false)){
+        if(sharedPreferences.getBoolean(KEY_IS_NIGHT_MODE, false)){
             aSwitch.setChecked(true);
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
         }else {

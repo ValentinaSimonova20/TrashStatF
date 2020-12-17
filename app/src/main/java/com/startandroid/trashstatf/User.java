@@ -1,9 +1,13 @@
 package com.startandroid.trashstatf;
 
 public class User {
-    public String name, email, pass, phone;
 
-    public User(){}
+    private String name;
+    private String email;
+    private String pass;
+    private String phone;
+
+    User(){}
 
 
     public User(String name, String email, String pass, String phone){
@@ -21,27 +25,27 @@ public class User {
         this.name = name;
     }
 
-    public String getEmail(){
+    String getEmail(){
         return email;
     }
 
-    public void setEmail(String email){
+    void setEmail(String email){
         this.email = email;
     }
 
-    public String getPass(){
+    String getPass(){
         return pass;
     }
 
-    public void setPass(String pass){
+    void setPass(String pass){
         this.pass = pass;
     }
 
-    public String getPhone(){
+    String getPhone(){
         return phone;
     }
 
-    public void setPhone(String phone){
+    void setPhone(String phone){
         this.phone = phone;
     }
 
