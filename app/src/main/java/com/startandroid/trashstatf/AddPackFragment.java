@@ -21,10 +21,6 @@ public class AddPackFragment extends Fragment implements AdapterView.OnItemSelec
     private Spinner spinner1;
     private Spinner spinner2;
     private ArrayAdapter<CharSequence> adapter2;
-<<<<<<< HEAD
-    private Button addPackButton;
-=======
->>>>>>> temp
 
     private DatabaseHelper dbHelper;
     private SharedPreferences loginPref;
@@ -63,24 +59,12 @@ public class AddPackFragment extends Fragment implements AdapterView.OnItemSelec
             default:
                 adapter2 = ArrayAdapter.createFromResource(getActivity(),R.array.RecycleCodesPlastic,android.R.layout.simple_spinner_item);
                 createSecondSpinner();
-<<<<<<< HEAD
-                break;
-=======
->>>>>>> temp
         }
 
 
     }
 
-<<<<<<< HEAD
-    // необходимый метод для интерфейса AdapterView.OnItemSelectedListener
-    @Override
-    public void onNothingSelected(AdapterView<?> parent) {
 
-    }
-
-=======
->>>>>>> temp
     private void createSecondSpinner(){
         adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         adapter2.notifyDataSetChanged();
@@ -88,17 +72,11 @@ public class AddPackFragment extends Fragment implements AdapterView.OnItemSelec
         spinner2.setOnItemSelectedListener(this);
     }
 
-
-
-    @Override
-<<<<<<< HEAD
-=======
     public void onNothingSelected(AdapterView<?> parent) {
         // необходимый метод для реализации интерфейса
     }
 
     @Override
->>>>>>> temp
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         getActivity().setTitle("Добавить упаковку");
         setHasOptionsMenu(true);
@@ -123,7 +101,6 @@ public class AddPackFragment extends Fragment implements AdapterView.OnItemSelec
             @Override
             public void onClick(View v) {
 
-
                 dbHelper = new DatabaseHelper(getActivity());
                 //считываем все введенные значения в поля формы
                 EditText product = getView().findViewById(R.id.productName);
@@ -138,16 +115,9 @@ public class AddPackFragment extends Fragment implements AdapterView.OnItemSelec
                     return;
                 }
 
-<<<<<<< HEAD
-
-                loginPref = getActivity().getSharedPreferences("login", Context.MODE_PRIVATE);
-                String userLogin = loginPref.getString("UsersLogin","");
-                String userLstId = dbHelper.getUserLst_id(userLogin);
-=======
                 loginPref = getActivity().getSharedPreferences("login", Context.MODE_PRIVATE);
                 String userLogin = loginPref.getString("UsersLogin","");
                 String userLstId = dbHelper.getUserLstId(userLogin);
->>>>>>> temp
                 dbHelper.addProduct(mes,spinner1Value,spinner2Value,Integer.parseInt(mes2),userLstId,userLogin);
                 Toast.makeText(getActivity(),"Продукт добавлен!",Toast.LENGTH_SHORT).show();
             }

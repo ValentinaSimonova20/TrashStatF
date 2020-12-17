@@ -1,10 +1,4 @@
 package com.startandroid.trashstatf;
-<<<<<<< HEAD
-
-import android.content.Context;
-import android.content.SharedPreferences;
-=======
->>>>>>> temp
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
